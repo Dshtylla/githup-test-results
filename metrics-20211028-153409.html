@@ -1,0 +1,3380 @@
+<!DOCTYPE doctype html>
+<html lang="en">
+ <head>
+  <link href="https://png.icons8.com/windows/50/000000/bot.png" rel="shortcut icon" type="image/x-icon"/>
+  <title>
+   RF Metrics
+  </title>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet"/>
+  <link href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+  <script src="https://code.jquery.com/jquery-3.3.1.js" type="text/javascript">
+  </script>
+  <!-- Bootstrap core Googleccharts -->
+  <script src="https://www.gstatic.com/charts/loader.js" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   google.charts.load('current', {
+                packages: ['corechart']
+            });
+  </script>
+  <!-- Bootstrap core Datatable-->
+  <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" type="text/javascript">
+  </script>
+  <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js" type="text/javascript">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js" type="text/javascript">
+  </script>
+  <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js" type="text/javascript">
+  </script>
+  <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js" type="text/javascript">
+  </script>
+  <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.colVis.min.js" type="text/javascript">
+  </script>
+  <style>
+   body {
+                font-family: -apple-system, sans-serif;
+                background-color: #eeeeee;
+            }
+
+            .sidenav {
+                height: 100%;
+                width: 220px;
+                position: fixed;
+                z-index: 1;
+                top: 0;
+                left: 0;
+                background-color: white;
+                overflow-x: hidden;
+            }
+
+            .sidenav a {
+                padding: 12px 10px 8px 12px;
+                text-decoration: none;
+                font-size: 18px;
+                color: Black;
+                display: block;
+            }
+
+            .main {
+                padding-top: 10px;
+            }
+
+            @media screen and (max-height: 450px) {
+                .sidenav {
+                    padding-top: 15px;
+                }
+                .sidenav a {
+                    font-size: 18px;
+                }
+            }
+
+            .wrimagecard {
+                margin-top: 0;
+                margin-bottom: 0.6rem;
+                border-radius: 10px;
+                transition: all 0.3s ease;
+                background-color: #f8f9fa;
+            }
+
+            .rowcard {
+                padding-top: 10px;
+                box-shadow: 12px 15px 20px 0px rgba(46, 61, 73, 0.15);
+                border-radius: 15px;
+                transition: all 0.3s ease;
+                background-color: white;
+            }
+
+            .tablecard {
+                background-color: white;
+                font-size: 14px;
+            }
+
+            tr {
+                height: 40px;
+            }
+
+            .dt-buttons {
+                margin-left: 5px;
+            }
+
+            th, td, tr {
+                text-align:center;
+                vertical-align: middle;
+            }
+
+            .loader {
+                position: fixed;
+                left: 0px;
+                top: 0px;
+                width: 100%;
+                height: 100%;
+                z-index: 9999;
+                background: url('https://i.ibb.co/cXnKsNR/Cube-1s-200px.gif') 50% 50% no-repeat rgb(249, 249, 249);
+            }
+  </style>
+ </head>
+</html>
+<body>
+ <div class="loader">
+ </div>
+ <div class="sidenav">
+  <a>
+   <img class="wrimagecard" src="https://www.servicenow.com/content/dam/now-www/en-us/images/global-nav/logo/servicenow-header-logo.svg" style="height:20vh;max-width:98%;"/>
+  </a>
+  <a class="tablink" href="#" id="defaultOpen" onclick="openPage('dashboard', this, '#fc6666')">
+   <i class="fa fa-dashboard" style="color:CORNFLOWERBLUE">
+   </i>
+   Dashboard
+  </a>
+  <a class="tablink" href="#" onclick="openPage('suiteMetrics', this, '#fc6666'); executeDataTable('#sm',5)">
+   <i class="fa fa-th-large" style="color:CADETBLUE">
+   </i>
+   Suite Metrics
+  </a>
+  <a class="tablink" href="#" onclick="openPage('testMetrics', this, '#fc6666'); executeDataTable('#tm',3)">
+   <i class="fa fa-list-alt" style="color:PALEVIOLETRED">
+   </i>
+   Test Metrics
+  </a>
+  <a class="tablink" href="#" onclick="openPage('keywordMetrics', this, '#fc6666'); executeDataTable('#km',3)">
+   <i class="fa fa-table" style="color:STEELBLUE">
+   </i>
+   Keyword Metrics
+  </a>
+  <a class="tablink" href="#" onclick="openPage('log', this, '#fc6666');">
+   <i class="fa fa-wpforms" style="color:CHOCOLATE">
+   </i>
+   Logs
+  </a>
+ </div>
+ <div class="main col-md-9 ml-sm-auto col-lg-10 px-4">
+  <div class="tabcontent" id="dashboard">
+   <div id="stats_screenshot_area">
+    <div class="d-flex flex-column flex-md-row align-items-center p-1 mb-3 bg-light border-bottom shadow-sm rowcard">
+     <h5 class="my-0 mr-md-auto font-weight-normal">
+      <i class="fa fa-dashboard">
+      </i>
+      Dashboard
+     </h5>
+     <nav class="my-2 my-md-0 mr-md-3" style="color:#fc6666">
+      <a class="p-2">
+       <b style="color:black;">
+        Execution Time:
+       </b>
+       00:01:40 h
+      </a>
+      <a class="p-2">
+       <b data-toggle="tooltip" style="color:black;cursor: pointer;" title=".xml file is created by">
+        Generated By:
+       </b>
+       Robot
+      </a>
+     </nav>
+    </div>
+    <div class="row rowcard">
+     <div class="col-md-4 border-right" data-toggle="tooltip" onclick="openPage('suiteMetrics', this, '')" style="cursor: pointer;" title="Click to view Suite metrics">
+      <span style="font-weight:bold; padding-left:5px;color:gray">
+       Suite Statistics:
+      </span>
+      <table style="width:100%;height:200px;text-align: center;">
+       <tbody>
+        <tr style="height:60%">
+         <td>
+          <table style="width:100%">
+           <tbody>
+            <tr style="height:100%">
+             <td style="font-size:60px; color:#2ecc71">
+              5
+             </td>
+            </tr>
+            <tr>
+             <td>
+              <span style="color: #999999;font-size:12px">
+               Pass
+              </span>
+             </td>
+            </tr>
+           </tbody>
+          </table>
+         </td>
+        </tr>
+        <tr style="height:25%">
+         <td>
+          <table style="width:100%">
+           <tbody>
+            <tr align="center" style="height:70%;font-size:25px" valign="middle">
+             <td style="width: 33%; color:brown">
+              5
+             </td>
+             <td style="width: 33%; color:orange">
+              0
+             </td>
+             <td style="width: 33%; color:#fc6666">
+              0
+             </td>
+            </tr>
+            <tr align="center" style="height:30%" valign="top">
+             <td style="width: 33%">
+              <span style="color: #999999;font-size:10px">
+               Total
+              </span>
+             </td>
+             <td style="width: 33%">
+              <span style="color: #999999;font-size:10px">
+               Skip
+              </span>
+             </td>
+             <td style="width: 33%">
+              <span style="color: #999999;font-size:10px">
+               Fail
+              </span>
+             </td>
+            </tr>
+           </tbody>
+          </table>
+         </td>
+        </tr>
+       </tbody>
+      </table>
+     </div>
+     <div class="col-md-4 borders" data-toggle="tooltip" onclick="openPage('testMetrics', this, '')" style="cursor: pointer;" title="Click to view Test metrics">
+      <span style="font-weight:bold; padding-left:5px;color:gray">
+       Test Statistics:
+      </span>
+      <table style="width:100%;height:200px;text-align: center;">
+       <tbody>
+        <tr style="height:60%">
+         <td>
+          <table style="width:100%">
+           <tbody>
+            <tr style="height:100%">
+             <td style="font-size:60px; color:#2ecc71">
+              9
+             </td>
+            </tr>
+            <tr>
+             <td>
+              <span style="color: #999999;font-size:12px">
+               Pass
+              </span>
+             </td>
+            </tr>
+           </tbody>
+          </table>
+         </td>
+        </tr>
+        <tr style="height:25%">
+         <td>
+          <table style="width:100%">
+           <tbody>
+            <tr align="center" style="height:70%;font-size:25px" valign="middle">
+             <td style="width: 33%; color:brown">
+              9
+             </td>
+             <td style="width: 33%; color:orange">
+              0
+             </td>
+             <td style="width: 33%; color:#fc6666">
+              0
+             </td>
+            </tr>
+            <tr align="center" style="height:30%" valign="top">
+             <td style="width: 33%">
+              <span style="color: #999999;font-size:10px">
+               Total
+              </span>
+             </td>
+             <td style="width: 33%">
+              <span style="color: #999999;font-size:10px">
+               Skip
+              </span>
+             </td>
+             <td style="width: 33%">
+              <span style="color: #999999;font-size:10px">
+               Fail
+              </span>
+             </td>
+            </tr>
+           </tbody>
+          </table>
+         </td>
+        </tr>
+       </tbody>
+      </table>
+     </div>
+     <div class="col-md-4 border-left" data-toggle="tooltip" onclick="openPage('keywordMetrics', this, '')" style="cursor: pointer;" title="Click to view Keyword metrics">
+      <span style="font-weight:bold; padding-left:5px;color:gray">
+       Keyword Statistics:
+      </span>
+      <table style="width:100%;height:200px;text-align: center;">
+       <tbody>
+        <tr style="height:60%">
+         <td>
+          <table style="width:100%">
+           <tbody>
+            <tr style="height:100%">
+             <td style="font-size:60px; color:#2ecc71">
+              121
+             </td>
+            </tr>
+            <tr>
+             <td>
+              <span style="color: #999999;font-size:12px">
+               Pass
+              </span>
+             </td>
+            </tr>
+           </tbody>
+          </table>
+         </td>
+        </tr>
+        <tr style="height:25%">
+         <td>
+          <table style="width:100%">
+           <tbody>
+            <tr align="center" style="height:70%;font-size:25px" valign="middle">
+             <td style="width: 33%; color:brown">
+              166
+             </td>
+             <td style="width: 33%; color:orange">
+              45
+             </td>
+             <td style="width: 33%; color:#fc6666">
+              0
+             </td>
+            </tr>
+            <tr align="center" style="height:30%" valign="top">
+             <td style="width: 33%">
+              <span style="color: #999999;font-size:10px">
+               Total
+              </span>
+             </td>
+             <td style="width: 33%">
+              <span style="color: #999999;font-size:10px">
+               Skip
+              </span>
+             </td>
+             <td style="width: 33%">
+              <span style="color: #999999;font-size:10px">
+               Fail
+              </span>
+             </td>
+            </tr>
+           </tbody>
+          </table>
+         </td>
+        </tr>
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <hr/>
+    <div class="row rowcard">
+     <div class="col-md-4" style="height:280px;width:auto;">
+      <span style="font-weight:bold;color:gray">
+       Suite Status:
+      </span>
+      <div id="suiteChartID" style="height:250px;width:auto;">
+      </div>
+     </div>
+     <div class="col-md-4" style="height:280px;width:auto;">
+      <span style="font-weight:bold;color:gray">
+       Test Status:
+      </span>
+      <div id="testChartID" style="height:250px;width:auto;">
+      </div>
+     </div>
+     <div class="col-md-4" style="height:280px;width:auto;">
+      <span style="font-weight:bold;color:gray">
+       Keyword Status:
+      </span>
+      <div id="keywordChartID" style="height:250px;width:auto;">
+      </div>
+     </div>
+    </div>
+    <hr/>
+    <div class="row rowcard">
+     <div class="col-md-12" style="height:450px;width:auto;">
+      <span style="font-weight:bold;color:gray">
+       Top 10 Suite Performance(sec):
+      </span>
+      <div id="suiteBarID" style="height:400px;width:auto;">
+      </div>
+     </div>
+    </div>
+    <hr/>
+    <div class="row rowcard">
+     <div class="col-md-12" style="height:450px;width:auto;">
+      <span style="font-weight:bold;color:gray">
+       Top 10 Test Performance(sec):
+      </span>
+      <div id="testsBarID" style="height:400px;width:auto;">
+      </div>
+     </div>
+    </div>
+    <hr/>
+    <div class="row rowcard">
+     <div class="col-md-12" style="height:450px;width:auto;">
+      <span style="font-weight:bold;color:gray">
+       Top 10 Keywords Performance(sec):
+      </span>
+      <div id="keywordsBarID" style="height:400px;width:auto;">
+      </div>
+     </div>
+    </div>
+    <div class="row">
+     <div class="col-md-12" style="height:25px;width:auto;">
+      <p class="text-muted" style="text-align:center;font-size:9px">
+       <a href="https://github.com/adiralashiva8/robotframework-metrics" style="color:gray" target="_blank">
+        robotframework-metrics
+       </a>
+      </p>
+     </div>
+    </div>
+    <script>
+     window.onload = function(){
+                executeDataTable('#sm',6);
+                executeDataTable('#tm',3);
+                executeDataTable('#km',3);
+                createPieChart(5,0,0,'suiteChartID','Suite Status:');
+                createBarGraph('#sm',0,6,10,'suiteBarID','Elapsed Time (s) ','Suite');
+                createPieChart(9,0,0,'testChartID','Tests Status:');
+                createBarGraph('#tm',1,3,10,'testsBarID','Elapsed Time (s) ','Test');
+                createPieChart(121,0,45,'keywordChartID','Keywords Status:');
+                createBarGraph('#km',1,3,10,'keywordsBarID','Elapsed Time (s) ','Keyword');
+            };
+    </script>
+    <script>
+     function openInNewTab(url,element_id) {
+                var element_id= element_id;
+                var win = window.open(url, '_blank');
+                win.focus();
+                $('body').scrollTo(element_id);
+            }
+    </script>
+   </div>
+  </div>
+  <div class="tabcontent" id="suiteMetrics">
+   <h4>
+    <b>
+     <i class="fa fa-table">
+     </i>
+     Suite Metrics
+    </b>
+   </h4>
+   <hr/>
+   <table class="table row-border tablecard" id="sm">
+    <thead>
+     <tr>
+      <th>
+       Suite Name
+      </th>
+      <th>
+       Status
+      </th>
+      <th>
+       Total
+      </th>
+      <th>
+       Pass
+      </th>
+      <th>
+       Fail
+      </th>
+      <th>
+       Fail
+      </th>
+      <th>
+       Time (s)
+      </th>
+     </tr>
+    </thead>
+    <tbody>
+     <tr>
+      <td data-toggle="tooltip" onclick="openInNewTab('log.html#s1-s2-s2','#s1-s2-s2')" style="word-wrap: break-word;max-width: 250px; white-space: normal;cursor: pointer; color:blue; text-align:left" title="Click to view 'PartnerSearch' logs">
+       PartnerSearch
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       5
+      </td>
+      <td style="color: green">
+       5
+      </td>
+      <td style="color: red">
+       0
+      </td>
+      <td style="color: orange">
+       0
+      </td>
+      <td>
+       41.803
+      </td>
+     </tr>
+     <tr>
+      <td data-toggle="tooltip" onclick="openInNewTab('log.html#s1-s2-s1','#s1-s2-s1')" style="word-wrap: break-word;max-width: 250px; white-space: normal;cursor: pointer; color:blue; text-align:left" title="Click to view 'ContactForm' logs">
+       ContactForm
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       1
+      </td>
+      <td style="color: green">
+       1
+      </td>
+      <td style="color: red">
+       0
+      </td>
+      <td style="color: orange">
+       0
+      </td>
+      <td>
+       25.833
+      </td>
+     </tr>
+     <tr>
+      <td data-toggle="tooltip" onclick="openInNewTab('log.html#s1-s1-s3','#s1-s1-s3')" style="word-wrap: break-word;max-width: 250px; white-space: normal;cursor: pointer; color:blue; text-align:left" title="Click to view 'Tabs' logs">
+       Tabs
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       1
+      </td>
+      <td style="color: green">
+       1
+      </td>
+      <td style="color: red">
+       0
+      </td>
+      <td style="color: orange">
+       0
+      </td>
+      <td>
+       7.312
+      </td>
+     </tr>
+     <tr>
+      <td data-toggle="tooltip" onclick="openInNewTab('log.html#s1-s1-s2','#s1-s1-s2')" style="word-wrap: break-word;max-width: 250px; white-space: normal;cursor: pointer; color:blue; text-align:left" title="Click to view 'FooterSubscribe' logs">
+       FooterSubscribe
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       1
+      </td>
+      <td style="color: green">
+       1
+      </td>
+      <td style="color: red">
+       0
+      </td>
+      <td style="color: orange">
+       0
+      </td>
+      <td>
+       10.119
+      </td>
+     </tr>
+     <tr>
+      <td data-toggle="tooltip" onclick="openInNewTab('log.html#s1-s1-s1','#s1-s1-s1')" style="word-wrap: break-word;max-width: 250px; white-space: normal;cursor: pointer; color:blue; text-align:left" title="Click to view 'Flyout' logs">
+       Flyout
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       1
+      </td>
+      <td style="color: green">
+       1
+      </td>
+      <td style="color: red">
+       0
+      </td>
+      <td style="color: orange">
+       0
+      </td>
+      <td>
+       15.396
+      </td>
+     </tr>
+    </tbody>
+   </table>
+   <div class="row">
+    <div class="col-md-12" style="height:25px;width:auto;">
+    </div>
+   </div>
+  </div>
+  <div class="tabcontent" id="testMetrics">
+   <h4>
+    <b>
+     <i class="fa fa-table">
+     </i>
+     Test Metrics
+    </b>
+   </h4>
+   <hr/>
+   <table class="table row-border tablecard" id="tm">
+    <thead>
+     <tr>
+      <th>
+       Suite Name
+      </th>
+      <th>
+       Test Case
+      </th>
+      <th>
+       Status
+      </th>
+      <th>
+       Time (s)
+      </th>
+      <th>
+       Error Message
+      </th>
+     </tr>
+    </thead>
+    <tbody>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 200px; white-space: normal; text-align:left">
+       PartnerSearch
+      </td>
+      <td data-toggle="tooltip" onclick="openInNewTab('log.html#s1-s2-s2-t5','#s1-s2-s2-t5')" style="word-wrap: break-word;max-width: 250px; white-space: normal;cursor: pointer; color:blue; text-align:left" title="Click to view 'Validate page redirect from Find a Partner url' logs">
+       Validate page redirect from Find a Partner url
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       5.743
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: pre-wrap;text-align:left">
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 200px; white-space: normal; text-align:left">
+       PartnerSearch
+      </td>
+      <td data-toggle="tooltip" onclick="openInNewTab('log.html#s1-s2-s2-t4','#s1-s2-s2-t4')" style="word-wrap: break-word;max-width: 250px; white-space: normal;cursor: pointer; color:blue; text-align:left" title="Click to view 'Verify if search suggester is displayed' logs">
+       Verify if search suggester is displayed
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       11.619
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: pre-wrap;text-align:left">
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 200px; white-space: normal; text-align:left">
+       PartnerSearch
+      </td>
+      <td data-toggle="tooltip" onclick="openInNewTab('log.html#s1-s2-s2-t3','#s1-s2-s2-t3')" style="word-wrap: break-word;max-width: 250px; white-space: normal;cursor: pointer; color:blue; text-align:left" title="Click to view 'Verify search query is present in the URL' logs">
+       Verify search query is present in the URL
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       8.155
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: pre-wrap;text-align:left">
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 200px; white-space: normal; text-align:left">
+       PartnerSearch
+      </td>
+      <td data-toggle="tooltip" onclick="openInNewTab('log.html#s1-s2-s2-t2','#s1-s2-s2-t2')" style="word-wrap: break-word;max-width: 250px; white-space: normal;cursor: pointer; color:blue; text-align:left" title="Click to view 'Verify when the search result is not found' logs">
+       Verify when the search result is not found
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       8.109
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: pre-wrap;text-align:left">
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 200px; white-space: normal; text-align:left">
+       PartnerSearch
+      </td>
+      <td data-toggle="tooltip" onclick="openInNewTab('log.html#s1-s2-s2-t1','#s1-s2-s2-t1')" style="word-wrap: break-word;max-width: 250px; white-space: normal;cursor: pointer; color:blue; text-align:left" title="Click to view 'Verify search query is executed and appropriate results are presented' logs">
+       Verify search query is executed and appropriate results are presented
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       8.159
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: pre-wrap;text-align:left">
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 200px; white-space: normal; text-align:left">
+       ContactForm
+      </td>
+      <td data-toggle="tooltip" onclick="openInNewTab('log.html#s1-s2-s1-t1','#s1-s2-s1-t1')" style="word-wrap: break-word;max-width: 250px; white-space: normal;cursor: pointer; color:blue; text-align:left" title="Click to view 'Submit Partner Finder contact form successfully' logs">
+       Submit Partner Finder contact form successfully
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       25.809
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: pre-wrap;text-align:left">
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 200px; white-space: normal; text-align:left">
+       Tabs
+      </td>
+      <td data-toggle="tooltip" onclick="openInNewTab('log.html#s1-s1-s3-t1','#s1-s1-s3-t1')" style="word-wrap: break-word;max-width: 250px; white-space: normal;cursor: pointer; color:blue; text-align:left" title="Click to view 'User should be able to navigates to homepage and click on tabs to verfy content opens.' logs">
+       User should be able to navigates to homepage and click on tabs to verfy content opens.
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       7.292
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: pre-wrap;text-align:left">
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 200px; white-space: normal; text-align:left">
+       FooterSubscribe
+      </td>
+      <td data-toggle="tooltip" onclick="openInNewTab('log.html#s1-s1-s2-t1','#s1-s1-s2-t1')" style="word-wrap: break-word;max-width: 250px; white-space: normal;cursor: pointer; color:blue; text-align:left" title="Click to view 'User should open homepage, scroll to the footer and fill and submit Subsribe to get the latest.' logs">
+       User should open homepage, scroll to the footer and fill and submit Subsribe to get the latest.
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       10.102
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: pre-wrap;text-align:left">
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 200px; white-space: normal; text-align:left">
+       Flyout
+      </td>
+      <td data-toggle="tooltip" onclick="openInNewTab('log.html#s1-s1-s1-t1','#s1-s1-s1-t1')" style="word-wrap: break-word;max-width: 250px; white-space: normal;cursor: pointer; color:blue; text-align:left" title="Click to view 'User should open, fill and submit the flyout form' logs">
+       User should open, fill and submit the flyout form
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       15.014
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: pre-wrap;text-align:left">
+      </td>
+     </tr>
+    </tbody>
+   </table>
+   <div class="row">
+    <div class="col-md-12" style="height:25px;width:auto;">
+    </div>
+   </div>
+  </div>
+  <div class="tabcontent" id="keywordMetrics">
+   <h4>
+    <b>
+     <i class="fa fa-table">
+     </i>
+     Keyword Metrics
+    </b>
+   </h4>
+   <hr/>
+   <table class="table row-border tablecard" id="km">
+    <thead>
+     <tr>
+      <th>
+       Test Case
+      </th>
+      <th>
+       Keyword
+      </th>
+      <th>
+       Status
+      </th>
+      <th>
+       Time (s)
+      </th>
+     </tr>
+    </thead>
+    <tbody>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       User should open, fill and submit the flyout form
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Before test steps
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       2.706
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       GenericSetup.After test steps
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Set Browserstack test status
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.002
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Validate page redirect from Find a Partner url
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       After test steps
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.155
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Validate page redirect from Find a Partner url
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Find a Partner url
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       3.574
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ELSE IF    "${BROWSER}" == "headlessedge"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Headless Edge browser
+      </td>
+      <td style="color: orange">
+       NOT RUN
+      </td>
+      <td>
+       0.0
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ELSE IF    "${BROWSER}" == "edge"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Edge browser
+      </td>
+      <td style="color: orange">
+       NOT RUN
+      </td>
+      <td>
+       0.0
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ELSE IF    "${BROWSER}" == "firefox"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Firefox browser
+      </td>
+      <td style="color: orange">
+       NOT RUN
+      </td>
+      <td>
+       0.0
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ELSE IF    "${BROWSER}" == "headlesschrome"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Chrome browser
+      </td>
+      <td style="color: orange">
+       NOT RUN
+      </td>
+      <td>
+       0.001
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       GenericSetup.Open Chrome browser
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Set chrome mobile emulation options
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.001
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ELSE IF    "${BROWSER}" == "chrome"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Chrome browser
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       1.794
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       IF    "${BROWSERSTACK_ENABLED}" == "true"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Run tests through Browserstack
+      </td>
+      <td style="color: orange">
+       NOT RUN
+      </td>
+      <td>
+       0.0
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       GenericSetup.Before test steps
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open web browser
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       1.817
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Validate page redirect from Find a Partner url
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Before test steps
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       1.948
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       GenericSetup.After test steps
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Set Browserstack test status
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.002
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Verify if search suggester is displayed
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       After test steps
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.245
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Verify if search suggester is displayed
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Check search suggester list
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       5.297
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Verify if search suggester is displayed
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Input text on element
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.293
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       PartnerFinderPage.Open Partner Finder page
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Click on element
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.248
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Verify if search suggester is displayed
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Partner Finder page
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       3.831
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ELSE IF    "${BROWSER}" == "headlessedge"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Headless Edge browser
+      </td>
+      <td style="color: orange">
+       NOT RUN
+      </td>
+      <td>
+       0.0
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ELSE IF    "${BROWSER}" == "edge"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Edge browser
+      </td>
+      <td style="color: orange">
+       NOT RUN
+      </td>
+      <td>
+       0.0
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ELSE IF    "${BROWSER}" == "firefox"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Firefox browser
+      </td>
+      <td style="color: orange">
+       NOT RUN
+      </td>
+      <td>
+       0.0
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ELSE IF    "${BROWSER}" == "headlesschrome"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Chrome browser
+      </td>
+      <td style="color: orange">
+       NOT RUN
+      </td>
+      <td>
+       0.001
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       GenericSetup.Open Chrome browser
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Set chrome mobile emulation options
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.002
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ELSE IF    "${BROWSER}" == "chrome"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Chrome browser
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       1.824
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       IF    "${BROWSERSTACK_ENABLED}" == "true"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Run tests through Browserstack
+      </td>
+      <td style="color: orange">
+       NOT RUN
+      </td>
+      <td>
+       0.0
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       GenericSetup.Before test steps
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open web browser
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       1.829
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Verify if search suggester is displayed
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Before test steps
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       1.951
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       GenericSetup.After test steps
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Set Browserstack test status
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.002
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Verify search query is present in the URL
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       After test steps
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.225
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       PartnerFinderPage.Check if search query is present in the page url
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       List Component - Get selected facet value from filter option element
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.139
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Verify search query is present in the URL
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Check if search query is present in the page url
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       2.147
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       PartnerFinderPage.Select the first option from first filter
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Click on element
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.319
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Verify search query is present in the URL
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Select the first option from first filter
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.321
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       PartnerFinderPage.Open Partner Finder page
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Click on element
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.266
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Verify search query is present in the URL
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Partner Finder page
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       3.532
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ELSE IF    "${BROWSER}" == "headlessedge"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Headless Edge browser
+      </td>
+      <td style="color: orange">
+       NOT RUN
+      </td>
+      <td>
+       0.0
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ELSE IF    "${BROWSER}" == "edge"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Edge browser
+      </td>
+      <td style="color: orange">
+       NOT RUN
+      </td>
+      <td>
+       0.0
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ELSE IF    "${BROWSER}" == "firefox"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Firefox browser
+      </td>
+      <td style="color: orange">
+       NOT RUN
+      </td>
+      <td>
+       0.0
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ELSE IF    "${BROWSER}" == "headlesschrome"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Chrome browser
+      </td>
+      <td style="color: orange">
+       NOT RUN
+      </td>
+      <td>
+       0.0
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       GenericSetup.Open Chrome browser
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Set chrome mobile emulation options
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.001
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ELSE IF    "${BROWSER}" == "chrome"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Chrome browser
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       1.781
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       IF    "${BROWSERSTACK_ENABLED}" == "true"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Run tests through Browserstack
+      </td>
+      <td style="color: orange">
+       NOT RUN
+      </td>
+      <td>
+       0.0
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       GenericSetup.Before test steps
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open web browser
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       1.786
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Verify search query is present in the URL
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Before test steps
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       1.928
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       GenericSetup.After test steps
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Set Browserstack test status
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.002
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Verify when the search result is not found
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       After test steps
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.27
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Verify when the search result is not found
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Check no results found messages are displayed
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.993
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       PartnerFinderPage.Search a term    ${no_results_search}
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Click on element
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.683
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       PartnerFinderPage.Search a term    ${no_results_search}
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Input text on element
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.467
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Verify when the search result is not found
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Search a term
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       1.152
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       PartnerFinderPage.Open Partner Finder page
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Click on element
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.295
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Verify when the search result is not found
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Partner Finder page
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       3.615
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ELSE IF    "${BROWSER}" == "headlessedge"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Headless Edge browser
+      </td>
+      <td style="color: orange">
+       NOT RUN
+      </td>
+      <td>
+       0.001
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ELSE IF    "${BROWSER}" == "edge"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Edge browser
+      </td>
+      <td style="color: orange">
+       NOT RUN
+      </td>
+      <td>
+       0.0
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ELSE IF    "${BROWSER}" == "firefox"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Firefox browser
+      </td>
+      <td style="color: orange">
+       NOT RUN
+      </td>
+      <td>
+       0.0
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ELSE IF    "${BROWSER}" == "headlesschrome"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Chrome browser
+      </td>
+      <td style="color: orange">
+       NOT RUN
+      </td>
+      <td>
+       0.0
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       GenericSetup.Open Chrome browser
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Set chrome mobile emulation options
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.002
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ELSE IF    "${BROWSER}" == "chrome"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Chrome browser
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       1.946
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       IF    "${BROWSERSTACK_ENABLED}" == "true"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Run tests through Browserstack
+      </td>
+      <td style="color: orange">
+       NOT RUN
+      </td>
+      <td>
+       0.0
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       GenericSetup.Before test steps
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open web browser
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       1.952
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Verify when the search result is not found
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Before test steps
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       2.077
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       GenericSetup.After test steps
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Set Browserstack test status
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.001
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Verify search query is executed and appropriate results are presented
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       After test steps
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.208
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Verify search query is executed and appropriate results are presented
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Check if search term remains in the search box
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.035
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Verify search query is executed and appropriate results are presented
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Check if tile description contains the searched term
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.687
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       PartnerFinderPage.Search a term    ${partner_name}
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Click on element
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.791
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       PartnerFinderPage.Search a term    ${partner_name}
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Input text on element
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.38
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Verify search query is executed and appropriate results are presented
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Search a term
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       1.172
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       PartnerFinderPage.Open Partner Finder page
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Click on element
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.261
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Verify search query is executed and appropriate results are presented
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Partner Finder page
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       3.893
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ELSE IF    "${BROWSER}" == "headlessedge"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Headless Edge browser
+      </td>
+      <td style="color: orange">
+       NOT RUN
+      </td>
+      <td>
+       0.0
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ELSE IF    "${BROWSER}" == "edge"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Edge browser
+      </td>
+      <td style="color: orange">
+       NOT RUN
+      </td>
+      <td>
+       0.0
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ELSE IF    "${BROWSER}" == "firefox"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Firefox browser
+      </td>
+      <td style="color: orange">
+       NOT RUN
+      </td>
+      <td>
+       0.001
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ELSE IF    "${BROWSER}" == "headlesschrome"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Chrome browser
+      </td>
+      <td style="color: orange">
+       NOT RUN
+      </td>
+      <td>
+       0.0
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       GenericSetup.Open Chrome browser
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Set chrome mobile emulation options
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.002
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ELSE IF    "${BROWSER}" == "chrome"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Chrome browser
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       2.022
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       IF    "${BROWSERSTACK_ENABLED}" == "true"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Run tests through Browserstack
+      </td>
+      <td style="color: orange">
+       NOT RUN
+      </td>
+      <td>
+       0.0
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       GenericSetup.Before test steps
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open web browser
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       2.038
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Verify search query is executed and appropriate results are presented
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Before test steps
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       2.162
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       GenericSetup.After test steps
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Set Browserstack test status
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.002
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Submit Partner Finder contact form successfully
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       After test steps
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.246
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ContactForm.Submit Partner Contact Form
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Click on element
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       11.328
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Submit Partner Finder contact form successfully
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Submit Partner Contact Form
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       13.371
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ContactForm.Fill out Partner Contact Form
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Click on element
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.095
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ContactForm.Fill out Partner Contact Form
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Input text on element
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.241
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ContactForm.Fill out Partner Contact Form
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Input text on element
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.126
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ContactForm.Fill out Partner Contact Form
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Input text on element
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.136
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ContactForm.Fill out Partner Contact Form
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Input text on element
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.158
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ContactForm.Fill out Partner Contact Form
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Input text on element
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.152
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ContactForm.Fill out Partner Contact Form
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Input text on element
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.269
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Submit Partner Finder contact form successfully
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Fill out Partner Contact Form
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       4.181
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       DetailPage.Click on Partner Finder Contact button
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Click on element
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.304
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Submit Partner Finder contact form successfully
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Click on Partner Finder Contact button
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.305
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       PartnerFinderPage.Click on first Partner Finder from the list
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Click on element
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       1.89
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Submit Partner Finder contact form successfully
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Click on first Partner Finder from the list
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       1.89
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       PartnerFinderPage.Open Partner Finder page
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Click on element
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.285
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Submit Partner Finder contact form successfully
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Partner Finder page
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       3.806
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ELSE IF    "${BROWSER}" == "headlessedge"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Headless Edge browser
+      </td>
+      <td style="color: orange">
+       NOT RUN
+      </td>
+      <td>
+       0.0
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ELSE IF    "${BROWSER}" == "edge"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Edge browser
+      </td>
+      <td style="color: orange">
+       NOT RUN
+      </td>
+      <td>
+       0.0
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ELSE IF    "${BROWSER}" == "firefox"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Firefox browser
+      </td>
+      <td style="color: orange">
+       NOT RUN
+      </td>
+      <td>
+       0.0
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ELSE IF    "${BROWSER}" == "headlesschrome"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Chrome browser
+      </td>
+      <td style="color: orange">
+       NOT RUN
+      </td>
+      <td>
+       0.0
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       GenericSetup.Open Chrome browser
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Set chrome mobile emulation options
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.001
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ELSE IF    "${BROWSER}" == "chrome"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Chrome browser
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       1.876
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       IF    "${BROWSERSTACK_ENABLED}" == "true"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Run tests through Browserstack
+      </td>
+      <td style="color: orange">
+       NOT RUN
+      </td>
+      <td>
+       0.0
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       GenericSetup.Before test steps
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open web browser
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       1.882
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Submit Partner Finder contact form successfully
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Before test steps
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       2.006
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       GenericSetup.After test steps
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Set Browserstack test status
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.002
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       User should be able to navigates to homepage and click on tabs to verfy content opens.
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       After test steps
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.245
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Tabs.Verify that Tab 2 is selected and displaying the content
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Element should have Attribute
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.015
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       User should be able to navigates to homepage and click on tabs to verfy content opens.
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Verify that Tab 2 is selected and displaying the content
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.015
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Tabs.Verify that Tab 4 is selected and displaying the content, then clcik on tab 2
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Click on element
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.083
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Tabs.Verify that Tab 4 is selected and displaying the content, then clcik on tab 2
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Element should have Attribute
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.018
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       User should be able to navigates to homepage and click on tabs to verfy content opens.
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Verify that Tab 4 is selected and displaying the content, then clcik on tab 2
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.102
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Tabs.Verify that Tab 3 is selected and displaying the content, then clcik on tab 4
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Click on element
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.098
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Tabs.Verify that Tab 3 is selected and displaying the content, then clcik on tab 4
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Element should have Attribute
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.017
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       User should be able to navigates to homepage and click on tabs to verfy content opens.
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Verify that Tab 3 is selected and displaying the content, then clcik on tab 4
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.115
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Tabs.Verify that Tab 1 is selected and displaying the content, then clcik on tab 3
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Click on element
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.117
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Tabs.Verify that Tab 1 is selected and displaying the content, then clcik on tab 3
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Element should have Attribute
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.019
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       User should be able to navigates to homepage and click on tabs to verfy content opens.
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Verify that Tab 1 is selected and displaying the content, then clcik on tab 3
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.136
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Tabs.Verify that Tab 2 is selected and displaying the content, then clcik on tab 1
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Click on element
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.105
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Tabs.Verify that Tab 2 is selected and displaying the content, then clcik on tab 1
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Element should have Attribute
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.043
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       User should be able to navigates to homepage and click on tabs to verfy content opens.
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Verify that Tab 2 is selected and displaying the content, then clcik on tab 1
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.149
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Tabs.Scroll then click on Tab element
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Click on element
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.234
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       User should be able to navigates to homepage and click on tabs to verfy content opens.
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Scroll then click on Tab element
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.795
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       User should be able to navigates to homepage and click on tabs to verfy content opens.
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Page
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       3.594
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ELSE IF    "${BROWSER}" == "headlessedge"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Headless Edge browser
+      </td>
+      <td style="color: orange">
+       NOT RUN
+      </td>
+      <td>
+       0.0
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ELSE IF    "${BROWSER}" == "edge"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Edge browser
+      </td>
+      <td style="color: orange">
+       NOT RUN
+      </td>
+      <td>
+       0.001
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ELSE IF    "${BROWSER}" == "firefox"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Firefox browser
+      </td>
+      <td style="color: orange">
+       NOT RUN
+      </td>
+      <td>
+       0.014
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ELSE IF    "${BROWSER}" == "headlesschrome"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Chrome browser
+      </td>
+      <td style="color: orange">
+       NOT RUN
+      </td>
+      <td>
+       0.0
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       GenericSetup.Open Chrome browser
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Set chrome mobile emulation options
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.019
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ELSE IF    "${BROWSER}" == "chrome"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Chrome browser
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       1.99
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       IF    "${BROWSERSTACK_ENABLED}" == "true"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Run tests through Browserstack
+      </td>
+      <td style="color: orange">
+       NOT RUN
+      </td>
+      <td>
+       0.0
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       GenericSetup.Before test steps
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open web browser
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       2.011
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       User should be able to navigates to homepage and click on tabs to verfy content opens.
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Before test steps
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       2.136
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       GenericSetup.After test steps
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Set Browserstack test status
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.002
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       User should open homepage, scroll to the footer and fill and submit Subsribe to get the latest.
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       After test steps
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.28
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       User should open homepage, scroll to the footer and fill and submit Subsribe to get the latest.
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Subscribe
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       2.823
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       User should open homepage, scroll to the footer and fill and submit Subsribe to get the latest.
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Input Email
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.201
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       User should open homepage, scroll to the footer and fill and submit Subsribe to get the latest.
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Scroll to footer
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.77
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       User should open homepage, scroll to the footer and fill and submit Subsribe to get the latest.
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Page
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       3.895
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ELSE IF    "${BROWSER}" == "headlessedge"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Headless Edge browser
+      </td>
+      <td style="color: orange">
+       NOT RUN
+      </td>
+      <td>
+       0.0
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ELSE IF    "${BROWSER}" == "edge"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Edge browser
+      </td>
+      <td style="color: orange">
+       NOT RUN
+      </td>
+      <td>
+       0.001
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ELSE IF    "${BROWSER}" == "firefox"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Firefox browser
+      </td>
+      <td style="color: orange">
+       NOT RUN
+      </td>
+      <td>
+       0.0
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ELSE IF    "${BROWSER}" == "headlesschrome"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Chrome browser
+      </td>
+      <td style="color: orange">
+       NOT RUN
+      </td>
+      <td>
+       0.001
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       GenericSetup.Open Chrome browser
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Set chrome mobile emulation options
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.001
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ELSE IF    "${BROWSER}" == "chrome"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Chrome browser
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       2.002
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       IF    "${BROWSERSTACK_ENABLED}" == "true"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Run tests through Browserstack
+      </td>
+      <td style="color: orange">
+       NOT RUN
+      </td>
+      <td>
+       0.0
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       GenericSetup.Before test steps
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open web browser
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       2.006
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       User should open homepage, scroll to the footer and fill and submit Subsribe to get the latest.
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Before test steps
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       2.13
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       GenericSetup.After test steps
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Set Browserstack test status
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.002
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       User should open, fill and submit the flyout form
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       After test steps
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.298
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       User should open, fill and submit the flyout form
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Submit Flyout Form
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       2.132
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       User should open, fill and submit the flyout form
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Fillout FlyOut Form
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       1.576
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       User should open, fill and submit the flyout form
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Contact Form
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       2.809
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       IF    "${result}" != "False"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Click on element
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.135
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       User should open, fill and submit the flyout form
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Trust Consent Track - Click on cookie policies button
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.342
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       User should open, fill and submit the flyout form
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Page
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       5.148
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ELSE IF    "${BROWSER}" == "headlessedge"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Headless Edge browser
+      </td>
+      <td style="color: orange">
+       NOT RUN
+      </td>
+      <td>
+       0.0
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ELSE IF    "${BROWSER}" == "edge"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Edge browser
+      </td>
+      <td style="color: orange">
+       NOT RUN
+      </td>
+      <td>
+       0.001
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ELSE IF    "${BROWSER}" == "firefox"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Firefox browser
+      </td>
+      <td style="color: orange">
+       NOT RUN
+      </td>
+      <td>
+       0.0
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ELSE IF    "${BROWSER}" == "headlesschrome"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Chrome browser
+      </td>
+      <td style="color: orange">
+       NOT RUN
+      </td>
+      <td>
+       0.0
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       GenericSetup.Open Chrome browser
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Set chrome mobile emulation options
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       0.002
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       ELSE IF    "${BROWSER}" == "chrome"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open Chrome browser
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       2.58
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       IF    "${BROWSERSTACK_ENABLED}" == "true"
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Run tests through Browserstack
+      </td>
+      <td style="color: orange">
+       NOT RUN
+      </td>
+      <td>
+       0.0
+      </td>
+     </tr>
+     <tr>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       GenericSetup.Before test steps
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Open web browser
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td>
+       2.585
+      </td>
+     </tr>
+    </tbody>
+   </table>
+   <div class="row">
+    <div class="col-md-12" style="height:25px;width:auto;">
+    </div>
+   </div>
+  </div>
+  <div class="tabcontent" id="log">
+   <p style="text-align:right">
+    **
+    <b>
+     Report.html
+    </b>
+    and
+    <b>
+     Log.html
+    </b>
+    need to be in current folder in 
+            order to display here
+   </p>
+   <div class="embed-responsive embed-responsive-4by3">
+    <iframe class="embed-responsive-item" src="log.html">
+    </iframe>
+   </div>
+  </div>
+ </div>
+ <script>
+  function createPieChart(passed_count, failed_count, skipped_count, ChartID, ChartName){
+            var status = [];
+            status.push(['Status', 'Percentage']);
+            status.push(['PASS',parseInt(passed_count)],['FAIL',parseInt(failed_count)],['SKIP',parseInt(skipped_count)]);
+            var data = google.visualization.arrayToDataTable(status);
+
+            var options = {
+            pieHole: 0.6,
+            legend: 'none',
+            chartArea: {width: "95%",height: "90%"},
+            colors: ['#2ecc71', '#fc6666', '#ffa500'],
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById(ChartID));
+            chart.draw(data, options);
+        }
+ </script>
+ <script>
+  function createBarGraph(tableID,keyword_column,time_column,limit,ChartID,Label,type){
+            var status = [];
+            css_selector_locator = tableID + ' tbody >tr'
+            var rows = $(css_selector_locator);
+            var columns;
+            var myColors = [
+                '#4F81BC',
+                '#C0504E',
+                '#9BBB58',
+                '#24BEAA',
+                '#8064A1',
+                '#4AACC5',
+                '#F79647',
+                '#815E86',
+                '#76A032',
+                '#34558B'
+            ];
+            status.push([type, Label,{ role: 'annotation'}, {role: 'style'}]);
+            for (var i = 0; i < rows.length; i++) {
+                if (i == Number(limit)){
+                    break;
+                }
+                //status = [];
+                name_value = $(rows[i]).find('td');
+
+                time=($(name_value[Number(time_column)]).html()).trim();
+                keyword=($(name_value[Number(keyword_column)]).html()).trim();
+                status.push([keyword,parseFloat(time),parseFloat(time),myColors[i]]);
+              }
+              var data = google.visualization.arrayToDataTable(status);
+
+              var options = {
+                legend: 'none',
+                chartArea: {width: "92%",height: "75%"},
+                bar: {
+                    groupWidth: '90%'
+                },
+                annotations: {
+                    alwaysOutside: true,
+                    textStyle: {
+                    fontName: 'Comic Sans MS',
+                    fontSize: 12,
+                    //bold: true,
+                    italic: true,
+                    color: "black",     // The color of the text.
+                    },
+                },
+                hAxis: {
+                    textStyle: {
+                        //fontName: 'Arial',
+                        fontName: 'Comic Sans MS',
+                        fontSize: 10,
+                    }
+                },
+                vAxis: {
+                    gridlines: { count: 10 },
+                    textStyle: {
+                        fontName: 'Comic Sans MS',
+                        fontSize: 10,
+                    }
+                },
+              };
+
+                // Instantiate and draw the chart.
+                var chart = new google.visualization.ColumnChart(document.getElementById(ChartID));
+                chart.draw(data, options);
+             }
+ </script>
+ <script>
+  function executeDataTable(tabname,sortCol) {
+        var fileTitle;
+        switch(tabname) {
+            case "#sm":
+                fileTitle = "SuiteMetrics";
+                break;
+            case "#tm":
+                fileTitle =  "TestMetrics";
+                break;
+            case "#km":
+                fileTitle =  "KeywordMetrics";
+                break;
+            default:
+                fileTitle =  "metrics";
+        }
+
+        $(tabname).DataTable(
+            {
+                retrieve: true,
+                "order": [[ Number(sortCol), "desc" ]],
+                dom: 'l<".margin" B>frtip',
+                "aoColumnDefs": [ {
+                    "aTargets": [ -1, -2 ],
+                    "mRender": function ( data, type, full ) {
+                        return $("<div/>").html(data).text(); 
+                    }
+                } ],
+                buttons: [
+                    {
+                        extend:    'copyHtml5',
+                        text:      '<i class="fa fa-files-o"></i>',
+                        filename: function() {
+                            return fileTitle + '-' + new Date().toLocaleString();
+                        },
+                        titleAttr: 'Copy',
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+					},
+
+                    {
+                        extend:    'csvHtml5',
+                        text:      '<i class="fa fa-file-text-o"></i>',
+                        titleAttr: 'CSV',
+                        filename: function() {
+                            return fileTitle + '-' + new Date().toLocaleString();
+                        },
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
+
+                    {
+                        extend:    'excelHtml5',
+                        text:      '<i class="fa fa-file-excel-o"></i>',
+                        titleAttr: 'Excel',
+                        filename: function() {
+                            return fileTitle + '-' + new Date().toLocaleString();
+                        },
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
+                    {
+                        extend:    'print',
+                        text:      '<i class="fa fa-print"></i>',
+                        titleAttr: 'Print',
+                        exportOptions: {
+                            columns: ':visible',
+                            alignment: 'left',
+                        }
+                    },
+                    {
+                        extend:    'colvis',
+                        collectionLayout: 'fixed two-column',
+                        text:      '<i class="fa fa-low-vision"></i>',
+                        titleAttr: 'Hide Column',
+                        exportOptions: {
+                            columns: ':visible'
+                        },
+                        postfixButtons: [ 'colvisRestore' ]
+                    },
+                ],
+                columnDefs: [ {
+                    visible: false,
+                } ]
+            }
+        );
+    }
+ </script>
+ <script>
+  function openPage(pageName,elmnt,color) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablink");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].style.color = "";
+        }
+        document.getElementById(pageName).style.display = "block";
+        elmnt.style.color = color;
+
+    }
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+ </script>
+ <script>
+  // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+ </script>
+ <script>
+  $(window).on('load',function(){$('.loader').fadeOut();});
+ </script>
+</body>
