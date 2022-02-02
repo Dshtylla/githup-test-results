@@ -1,0 +1,6185 @@
+<!DOCTYPE doctype>
+<!-- saved from url=(0112)file:///Users/jorgecampos/VCS%20PROJECTS/SN%20Framework/robot-automation-framework/metrics-20220202-112926.html# -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link href="https://png.icons8.com/windows/50/000000/bot.png" rel="shortcut icon" type="image/x-icon">
+  <title>
+   RF Metrics
+  </title>
+  
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <link href="./RF Metrics_files/jquery.dataTables.min.css" rel="stylesheet">
+  <link href="./RF Metrics_files/buttons.dataTables.min.css" rel="stylesheet">
+  <link href="./RF Metrics_files/bootstrap.min.css" rel="stylesheet">
+  <link href="./RF Metrics_files/font-awesome.min.css" rel="stylesheet">
+  <script src="./RF Metrics_files/jquery-3.3.1.js" type="text/javascript">
+  </script>
+  <!-- Bootstrap core Googleccharts -->
+  <script src="./RF Metrics_files/loader.js" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   google.charts.load('current', {
+                packages: ['corechart']
+            });
+  </script><script type="text/javascript" charset="UTF-8" src="./RF Metrics_files/loader(1).js"></script>
+  <!-- Bootstrap core Datatable-->
+  <script src="./RF Metrics_files/jquery.dataTables.min.js" type="text/javascript">
+  </script>
+  <script src="./RF Metrics_files/dataTables.buttons.min.js" type="text/javascript">
+  </script>
+  <script src="./RF Metrics_files/jszip.min.js" type="text/javascript">
+  </script>
+  <script src="./RF Metrics_files/buttons.html5.min.js" type="text/javascript">
+  </script>
+  <script src="./RF Metrics_files/buttons.print.min.js" type="text/javascript">
+  </script>
+  <script src="./RF Metrics_files/buttons.colVis.min.js" type="text/javascript">
+  </script>
+  <style>
+   body {
+                font-family: -apple-system, sans-serif;
+                background-color: #eeeeee;
+            }
+
+            .sidenav {
+                height: 100%;
+                width: 220px;
+                position: fixed;
+                z-index: 1;
+                top: 0;
+                left: 0;
+                background-color: white;
+                overflow-x: hidden;
+            }
+
+            .sidenav a {
+                padding: 12px 10px 8px 12px;
+                text-decoration: none;
+                font-size: 18px;
+                color: Black;
+                display: block;
+            }
+
+            .main {
+                padding-top: 10px;
+            }
+
+            @media screen and (max-height: 450px) {
+                .sidenav {
+                    padding-top: 15px;
+                }
+                .sidenav a {
+                    font-size: 18px;
+                }
+            }
+
+            .wrimagecard {
+                margin-top: 0;
+                margin-bottom: 0.6rem;
+                border-radius: 10px;
+                transition: all 0.3s ease;
+                background-color: #f8f9fa;
+            }
+
+            .rowcard {
+                padding-top: 10px;
+                box-shadow: 12px 15px 20px 0px rgba(46, 61, 73, 0.15);
+                border-radius: 15px;
+                transition: all 0.3s ease;
+                background-color: white;
+            }
+
+            .tablecard {
+                background-color: white;
+                font-size: 14px;
+            }
+
+            tr {
+                height: 40px;
+            }
+
+            .dt-buttons {
+                margin-left: 5px;
+            }
+
+            th, td, tr {
+                text-align:center;
+                vertical-align: middle;
+            }
+
+            .loader {
+                position: fixed;
+                left: 0px;
+                top: 0px;
+                width: 100%;
+                height: 100%;
+                z-index: 9999;
+                background: url('https://i.ibb.co/cXnKsNR/Cube-1s-200px.gif') 50% 50% no-repeat rgb(249, 249, 249);
+            }
+  </style>
+ <link id="load-css-0" rel="stylesheet" type="text/css" href="./RF Metrics_files/tooltip.css"><link id="load-css-1" rel="stylesheet" type="text/css" href="./RF Metrics_files/util.css"><script type="text/javascript" charset="UTF-8" src="./RF Metrics_files/jsapi_compiled_default_module.js"></script><script type="text/javascript" charset="UTF-8" src="./RF Metrics_files/jsapi_compiled_graphics_module.js"></script><script type="text/javascript" charset="UTF-8" src="./RF Metrics_files/jsapi_compiled_ui_module.js"></script><script type="text/javascript" charset="UTF-8" src="./RF Metrics_files/jsapi_compiled_corechart_module.js"></script></head>
+<body>
+
+ <div class="loader" style="display: none;">
+ </div>
+ <div class="sidenav">
+  <a>
+   <img class="wrimagecard" src="./RF Metrics_files/servicenow-header-logo.svg" style="height:20vh;max-width:98%;">
+  </a>
+  <a class="tablink" href="file:///Users/jorgecampos/VCS%20PROJECTS/SN%20Framework/robot-automation-framework/metrics-20220202-112926.html#" id="defaultOpen" onclick="openPage(&#39;dashboard&#39;, this, &#39;#fc6666&#39;)" style="color: rgb(252, 102, 102);">
+   <i class="fa fa-dashboard" style="color:CORNFLOWERBLUE">
+   </i>
+   Dashboard
+  </a>
+  <a class="tablink" href="file:///Users/jorgecampos/VCS%20PROJECTS/SN%20Framework/robot-automation-framework/metrics-20220202-112926.html#" onclick="openPage(&#39;suiteMetrics&#39;, this, &#39;#fc6666&#39;); executeDataTable(&#39;#sm&#39;,5)">
+   <i class="fa fa-th-large" style="color:CADETBLUE">
+   </i>
+   Suite Metrics
+  </a>
+  <a class="tablink" href="file:///Users/jorgecampos/VCS%20PROJECTS/SN%20Framework/robot-automation-framework/metrics-20220202-112926.html#" onclick="openPage(&#39;testMetrics&#39;, this, &#39;#fc6666&#39;); executeDataTable(&#39;#tm&#39;,3)">
+   <i class="fa fa-list-alt" style="color:PALEVIOLETRED">
+   </i>
+   Test Metrics
+  </a>
+  <a class="tablink" href="file:///Users/jorgecampos/VCS%20PROJECTS/SN%20Framework/robot-automation-framework/metrics-20220202-112926.html#" onclick="openPage(&#39;keywordMetrics&#39;, this, &#39;#fc6666&#39;); executeDataTable(&#39;#km&#39;,3)">
+   <i class="fa fa-table" style="color:STEELBLUE">
+   </i>
+   Keyword Metrics
+  </a>
+  <a class="tablink" href="file:///Users/jorgecampos/VCS%20PROJECTS/SN%20Framework/robot-automation-framework/metrics-20220202-112926.html#" onclick="openPage(&#39;log&#39;, this, &#39;#fc6666&#39;);">
+   <i class="fa fa-wpforms" style="color:CHOCOLATE">
+   </i>
+   Logs
+  </a>
+ </div>
+ <div class="main col-md-9 ml-sm-auto col-lg-10 px-4">
+  <div class="tabcontent" id="dashboard" style="display: block;">
+   <div id="stats_screenshot_area">
+    <div class="d-flex flex-column flex-md-row align-items-center p-1 mb-3 bg-light border-bottom shadow-sm rowcard">
+     <h5 class="my-0 mr-md-auto font-weight-normal">
+      <i class="fa fa-dashboard">
+      </i>
+      Dashboard
+     </h5>
+     <nav class="my-2 my-md-0 mr-md-3" style="color:#fc6666">
+      <a class="p-2">
+       <b style="color:black;">
+        Execution Time:
+       </b>
+       00:33:52 h
+      </a>
+      <a class="p-2">
+       <b data-toggle="tooltip" style="color:black;cursor: pointer;" title=".xml file is created by">
+        Generated By:
+       </b>
+       Rebot
+      </a>
+     </nav>
+    </div>
+    <div class="row rowcard">
+     <div class="col-md-4 border-right" data-toggle="tooltip" onclick="openPage(&#39;suiteMetrics&#39;, this, &#39;&#39;)" style="cursor: pointer;" title="Click to view Suite metrics">
+      <span style="font-weight:bold; padding-left:5px;color:gray">
+       Suite Statistics:
+      </span>
+      <table style="width:100%;height:200px;text-align: center;">
+       <tbody>
+        <tr style="height:60%">
+         <td>
+          <table style="width:100%">
+           <tbody>
+            <tr style="height:100%">
+             <td style="font-size:60px; color:#2ecc71">
+              9
+             </td>
+            </tr>
+            <tr>
+             <td>
+              <span style="color: #999999;font-size:12px">
+               Pass
+              </span>
+             </td>
+            </tr>
+           </tbody>
+          </table>
+         </td>
+        </tr>
+        <tr style="height:25%">
+         <td>
+          <table style="width:100%">
+           <tbody>
+            <tr align="center" style="height:70%;font-size:25px" valign="middle">
+             <td style="width: 33%; color:brown">
+              28
+             </td>
+             <td style="width: 33%; color:orange">
+              0
+             </td>
+             <td style="width: 33%; color:#fc6666">
+              19
+             </td>
+            </tr>
+            <tr align="center" style="height:30%" valign="top">
+             <td style="width: 33%">
+              <span style="color: #999999;font-size:10px">
+               Total
+              </span>
+             </td>
+             <td style="width: 33%">
+              <span style="color: #999999;font-size:10px">
+               Skip
+              </span>
+             </td>
+             <td style="width: 33%">
+              <span style="color: #999999;font-size:10px">
+               Fail
+              </span>
+             </td>
+            </tr>
+           </tbody>
+          </table>
+         </td>
+        </tr>
+       </tbody>
+      </table>
+     </div>
+     <div class="col-md-4 borders" data-toggle="tooltip" onclick="openPage(&#39;testMetrics&#39;, this, &#39;&#39;)" style="cursor: pointer;" title="Click to view Test metrics">
+      <span style="font-weight:bold; padding-left:5px;color:gray">
+       Test Statistics:
+      </span>
+      <table style="width:100%;height:200px;text-align: center;">
+       <tbody>
+        <tr style="height:60%">
+         <td>
+          <table style="width:100%">
+           <tbody>
+            <tr style="height:100%">
+             <td style="font-size:60px; color:#2ecc71">
+              30
+             </td>
+            </tr>
+            <tr>
+             <td>
+              <span style="color: #999999;font-size:12px">
+               Pass
+              </span>
+             </td>
+            </tr>
+           </tbody>
+          </table>
+         </td>
+        </tr>
+        <tr style="height:25%">
+         <td>
+          <table style="width:100%">
+           <tbody>
+            <tr align="center" style="height:70%;font-size:25px" valign="middle">
+             <td style="width: 33%; color:brown">
+              93
+             </td>
+             <td style="width: 33%; color:orange">
+              0
+             </td>
+             <td style="width: 33%; color:#fc6666">
+              63
+             </td>
+            </tr>
+            <tr align="center" style="height:30%" valign="top">
+             <td style="width: 33%">
+              <span style="color: #999999;font-size:10px">
+               Total
+              </span>
+             </td>
+             <td style="width: 33%">
+              <span style="color: #999999;font-size:10px">
+               Skip
+              </span>
+             </td>
+             <td style="width: 33%">
+              <span style="color: #999999;font-size:10px">
+               Fail
+              </span>
+             </td>
+            </tr>
+           </tbody>
+          </table>
+         </td>
+        </tr>
+       </tbody>
+      </table>
+     </div>
+     <div class="col-md-4 border-left" data-toggle="tooltip" onclick="openPage(&#39;keywordMetrics&#39;, this, &#39;&#39;)" style="cursor: pointer;" title="Click to view Keyword metrics">
+      <span style="font-weight:bold; padding-left:5px;color:gray">
+       Keyword Statistics:
+      </span>
+      <table style="width:100%;height:200px;text-align: center;">
+       <tbody>
+        <tr style="height:60%">
+         <td>
+          <table style="width:100%">
+           <tbody>
+            <tr style="height:100%">
+             <td style="font-size:60px; color:#2ecc71">
+              3993
+             </td>
+            </tr>
+            <tr>
+             <td>
+              <span style="color: #999999;font-size:12px">
+               Pass
+              </span>
+             </td>
+            </tr>
+           </tbody>
+          </table>
+         </td>
+        </tr>
+        <tr style="height:25%">
+         <td>
+          <table style="width:100%">
+           <tbody>
+            <tr align="center" style="height:70%;font-size:25px" valign="middle">
+             <td style="width: 33%; color:brown">
+              4870
+             </td>
+             <td style="width: 33%; color:orange">
+              743
+             </td>
+             <td style="width: 33%; color:#fc6666">
+              134
+             </td>
+            </tr>
+            <tr align="center" style="height:30%" valign="top">
+             <td style="width: 33%">
+              <span style="color: #999999;font-size:10px">
+               Total
+              </span>
+             </td>
+             <td style="width: 33%">
+              <span style="color: #999999;font-size:10px">
+               Skip
+              </span>
+             </td>
+             <td style="width: 33%">
+              <span style="color: #999999;font-size:10px">
+               Fail
+              </span>
+             </td>
+            </tr>
+           </tbody>
+          </table>
+         </td>
+        </tr>
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <hr>
+    <div class="row rowcard">
+     <div class="col-md-4" style="height:280px;width:auto;">
+      <span style="font-weight:bold;color:gray">
+       Suite Status:
+      </span>
+      <div id="suiteChartID" style="height:250px;width:auto;"><div style="position: relative;"><div dir="ltr" style="position: relative; width: 497px; height: 250px;"><div aria-label="A chart." style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%;"><svg width="497" height="250" aria-label="A chart." style="overflow: hidden;"><defs id="_ABSTRACT_RENDERER_ID_0"><filter id="_ABSTRACT_RENDERER_ID_10"><fegaussianblur in="SourceAlpha" stdDeviation="2"></fegaussianblur><feoffset dx="1" dy="1"></feoffset><fecomponenttransfer><fefunca type="linear" slope="0.1"></fefunca></fecomponenttransfer><femerge><femergenode></femergenode><femergenode in="SourceGraphic"></femergenode></femerge></filter></defs><rect x="0" y="0" width="497" height="250" stroke="none" stroke-width="0" fill="#ffffff"></rect><g><path d="M248,58.8L248,14A112,112,0,0,1,348.9085132050709,174.59497878116653L308.54510792304256,155.1569872686999A67.2,67.2,0,0,0,248,58.8" stroke="#ffffff" stroke-width="1" fill="#2ecc71"></path><text text-anchor="start" x="304.37485521561706" y="84.68803521328888" font-family="Arial" font-size="11" stroke="none" stroke-width="0" fill="#ffffff">32.1%</text></g><g><path d="M308.54510792304256,155.1569872686999L348.9085132050709,174.59497878116653A112,112,0,1,1,248,14L248,58.8A67.2,67.2,0,1,0,308.54510792304256,155.1569872686999" stroke="#ffffff" stroke-width="1" fill="#fc6666"></path><text text-anchor="start" x="160.62514478438294" y="175.0119647867111" font-family="Arial" font-size="11" stroke="none" stroke-width="0" fill="#ffffff">67.9%</text></g><g></g></svg><div aria-label="A tabular representation of the data in the chart." style="position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden;"><table><thead><tr><th>Status</th><th>Percentage</th></tr></thead><tbody><tr><td>PASS</td><td>9</td></tr><tr><td>FAIL</td><td>19</td></tr><tr><td>SKIP</td><td>0</td></tr></tbody></table></div></div></div><div aria-hidden="true" style="display: none; position: absolute; top: 260px; left: 507px; white-space: nowrap; font-family: Arial; font-size: 11px; font-weight: bold;">9 (32.1%)</div><div></div></div></div>
+     </div>
+     <div class="col-md-4" style="height:280px;width:auto;">
+      <span style="font-weight:bold;color:gray">
+       Test Status:
+      </span>
+      <div id="testChartID" style="height:250px;width:auto;"><div style="position: relative;"><div dir="ltr" style="position: relative; width: 497px; height: 250px;"><div aria-label="A chart." style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%;"><svg width="497" height="250" aria-label="A chart." style="overflow: hidden;"><defs id="_ABSTRACT_RENDERER_ID_3"><filter id="_ABSTRACT_RENDERER_ID_9"><fegaussianblur in="SourceAlpha" stdDeviation="2"></fegaussianblur><feoffset dx="1" dy="1"></feoffset><fecomponenttransfer><fefunca type="linear" slope="0.1"></fefunca></fecomponenttransfer><femerge><femergenode></femergenode><femergenode in="SourceGraphic"></femergenode></femerge></filter></defs><rect x="0" y="0" width="497" height="250" stroke="none" stroke-width="0" fill="#ffffff"></rect><g><path d="M248,58.8L248,14A112,112,0,0,1,348.55410843192305,175.32414497445504L308.33246505915383,155.594486984673A67.2,67.2,0,0,0,248,58.8" stroke="#ffffff" stroke-width="1" fill="#2ecc71"></path><text text-anchor="start" x="304.52864448292587" y="84.95420260595566" font-family="Arial" font-size="11" stroke="none" stroke-width="0" fill="#ffffff">32.3%</text></g><g><path d="M308.33246505915383,155.594486984673L348.55410843192305,175.32414497445504A112,112,0,1,1,248,14L248,58.8A67.2,67.2,0,1,0,308.33246505915383,155.594486984673" stroke="#ffffff" stroke-width="1" fill="#fc6666"></path><text text-anchor="start" x="160.47135551707413" y="174.74579739404433" font-family="Arial" font-size="11" stroke="none" stroke-width="0" fill="#ffffff">67.7%</text></g><g></g></svg><div aria-label="A tabular representation of the data in the chart." style="position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden;"><table><thead><tr><th>Status</th><th>Percentage</th></tr></thead><tbody><tr><td>PASS</td><td>30</td></tr><tr><td>FAIL</td><td>63</td></tr><tr><td>SKIP</td><td>0</td></tr></tbody></table></div></div></div><div aria-hidden="true" style="display: none; position: absolute; top: 260px; left: 507px; white-space: nowrap; font-family: Arial; font-size: 11px; font-weight: bold;">30 (32.3%)</div><div></div></div></div>
+     </div>
+     <div class="col-md-4" style="height:280px;width:auto;">
+      <span style="font-weight:bold;color:gray">
+       Keyword Status:
+      </span>
+      <div id="keywordChartID" style="height:250px;width:auto;"><div style="position: relative;"><div dir="ltr" style="position: relative; width: 497px; height: 250px;"><div aria-label="A chart." style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%;"><svg width="497" height="250" aria-label="A chart." style="overflow: hidden;"><defs id="_ABSTRACT_RENDERER_ID_6"></defs><rect x="0" y="0" width="497" height="250" stroke="none" stroke-width="0" fill="#ffffff"></rect><g><path d="M193.00414157189547,87.38270393002787L156.34023595315912,61.63783988337978A112,112,0,0,1,248,14L248,58.8A67.2,67.2,0,0,0,193.00414157189547,87.38270393002787" stroke="#ffffff" stroke-width="1" fill="#ffa500"></path><text text-anchor="start" x="191.75787981164768" y="51.458260736119364" font-family="Arial" font-size="11" stroke="none" stroke-width="0" fill="#ffffff">15.3%</text></g><g><path d="M187.1808641093415,97.41901489602543L146.63477351556918,78.36502482670906A112,112,0,0,1,156.34023595315912,61.63783988337978L193.00414157189547,87.38270393002787A67.2,67.2,0,0,0,187.1808641093415,97.41901489602543" stroke="#ffffff" stroke-width="1" fill="#fc6666"></path></g><g><path d="M248,58.8L248,14A112,112,0,1,1,146.63477351556918,78.36502482670906L187.1808641093415,97.41901489602543A67.2,67.2,0,1,0,248,58.8" stroke="#ffffff" stroke-width="1" fill="#2ecc71"></path><text text-anchor="start" x="285.38414928921753" y="206.04775280383132" font-family="Arial" font-size="11" stroke="none" stroke-width="0" fill="#ffffff">82%</text></g><g></g></svg><div aria-label="A tabular representation of the data in the chart." style="position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden;"><table><thead><tr><th>Status</th><th>Percentage</th></tr></thead><tbody><tr><td>PASS</td><td>3,993</td></tr><tr><td>FAIL</td><td>134</td></tr><tr><td>SKIP</td><td>743</td></tr></tbody></table></div></div></div><div aria-hidden="true" style="display: none; position: absolute; top: 260px; left: 507px; white-space: nowrap; font-family: Arial; font-size: 11px;">15.3%</div><div></div></div></div>
+     </div>
+    </div>
+    <hr>
+    <div class="row rowcard">
+     <div class="col-md-12" style="height:450px;width:auto;">
+      <span style="font-weight:bold;color:gray">
+       Top 10 Suite Performance(sec):
+      </span>
+      <div id="suiteBarID" style="height:400px;width:auto;"><div style="position: relative;"><div dir="ltr" style="position: relative; width: 1552px; height: 400px;"><div aria-label="A chart." style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%;"><svg width="1552" height="400" aria-label="A chart." style="overflow: hidden;"><defs id="_ABSTRACT_RENDERER_ID_1"><clippath id="_ABSTRACT_RENDERER_ID_2"><rect x="62" y="50" width="1428" height="300"></rect></clippath></defs><rect x="0" y="0" width="1552" height="400" stroke="none" stroke-width="0" fill="#ffffff"></rect><g><rect x="62" y="50" width="1428" height="300" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g clip-path="url(file:///Users/jorgecampos/VCS%20PROJECTS/SN%20Framework/robot-automation-framework/metrics-20220202-112926.html#_ABSTRACT_RENDERER_ID_2)"><g><rect x="62" y="349" width="1428" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="62" y="299" width="1428" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="62" y="249" width="1428" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="62" y="200" width="1428" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="62" y="150" width="1428" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="62" y="100" width="1428" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="62" y="50" width="1428" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="62" y="324" width="1428" height="1" stroke="none" stroke-width="0" fill="#ebebeb"></rect><rect x="62" y="274" width="1428" height="1" stroke="none" stroke-width="0" fill="#ebebeb"></rect><rect x="62" y="224" width="1428" height="1" stroke="none" stroke-width="0" fill="#ebebeb"></rect><rect x="62" y="175" width="1428" height="1" stroke="none" stroke-width="0" fill="#ebebeb"></rect><rect x="62" y="125" width="1428" height="1" stroke="none" stroke-width="0" fill="#ebebeb"></rect><rect x="62" y="75" width="1428" height="1" stroke="none" stroke-width="0" fill="#ebebeb"></rect></g><g><rect x="70" y="84" width="128" height="265" stroke="#4f81bc" stroke-width="1" fill="#4f81bc"></rect><rect x="212" y="218" width="129" height="131" stroke="#c0504e" stroke-width="1" fill="#c0504e"></rect><rect x="355" y="236" width="128" height="113" stroke="#9bbb58" stroke-width="1" fill="#9bbb58"></rect><rect x="498" y="239" width="128" height="110" stroke="#24beaa" stroke-width="1" fill="#24beaa"></rect><rect x="640" y="273" width="129" height="76" stroke="#8064a1" stroke-width="1" fill="#8064a1"></rect><rect x="783" y="273" width="129" height="76" stroke="#4aacc5" stroke-width="1" fill="#4aacc5"></rect><rect x="926" y="294" width="128" height="55" stroke="#f79647" stroke-width="1" fill="#f79647"></rect><rect x="1069" y="294" width="128" height="55" stroke="#815e86" stroke-width="1" fill="#815e86"></rect><rect x="1211" y="300" width="129" height="49" stroke="#76a032" stroke-width="1" fill="#76a032"></rect><rect x="1354" y="301" width="128" height="48" stroke="#34558b" stroke-width="1" fill="#34558b"></rect></g><g><rect x="62" y="349" width="1428" height="1" stroke="none" stroke-width="0" fill="#333333"></rect></g><g><rect x="134" y="72" width="1" height="12" stroke="none" stroke-width="0" fill="#999999"></rect><rect x="276" y="206" width="1" height="12" stroke="none" stroke-width="0" fill="#999999"></rect><rect x="419" y="224" width="1" height="12" stroke="none" stroke-width="0" fill="#999999"></rect><rect x="562" y="227" width="1" height="12" stroke="none" stroke-width="0" fill="#999999"></rect><rect x="704" y="261" width="1" height="12" stroke="none" stroke-width="0" fill="#999999"></rect><rect x="847" y="261" width="1" height="12" stroke="none" stroke-width="0" fill="#999999"></rect><rect x="990" y="282" width="1" height="12" stroke="none" stroke-width="0" fill="#999999"></rect><rect x="1133" y="282" width="1" height="12" stroke="none" stroke-width="0" fill="#999999"></rect><rect x="1275" y="288" width="1" height="12" stroke="none" stroke-width="0" fill="#999999"></rect><rect x="1418" y="289" width="1" height="12" stroke="none" stroke-width="0" fill="#999999"></rect></g></g><g></g><g><g><text text-anchor="middle" x="133.85" y="364.5" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#222222">NavLinks</text></g><g><text text-anchor="middle" x="276.54999999999995" y="377.5" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#222222">Footer</text></g><g><text text-anchor="middle" x="419.25" y="364.5" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#222222">Tag</text></g><g><text text-anchor="middle" x="561.9499999999999" y="377.5" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#222222">UserRegistrationFlows</text></g><g><text text-anchor="middle" x="704.65" y="364.5" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#222222">EditProfile+acc</text></g><g><text text-anchor="middle" x="847.3499999999999" y="377.5" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#222222">UserRegistrationFlows+account</text></g><g><text text-anchor="middle" x="990.05" y="364.5" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#222222">SignUp</text></g><g><text text-anchor="middle" x="1132.75" y="377.5" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#222222">RegisteredUserFlows</text></g><g><text text-anchor="middle" x="1275.4499999999998" y="364.5" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#222222">ProgressiveProfiling</text></g><g><text text-anchor="middle" x="1418.1499999999999" y="377.5" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#222222">FormSubmissionLoggedIn</text></g><g><text text-anchor="end" x="52" y="353" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#444444">0</text></g><g><text text-anchor="end" x="52" y="303.1667" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#444444">200</text></g><g><text text-anchor="end" x="52" y="253.3333" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#444444">400</text></g><g><text text-anchor="end" x="52" y="203.5" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#444444">600</text></g><g><text text-anchor="end" x="52" y="153.6667" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#444444">800</text></g><g><text text-anchor="end" x="52" y="103.8333" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#444444">1,000</text></g><g><text text-anchor="end" x="52" y="54" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#444444">1,200</text></g></g><g><g><g><rect x="103.5" y="59.5" width="62" height="14" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g><text text-anchor="middle" x="134" y="70.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="#ffffff" stroke-width="3" fill="#375a84" aria-hidden="true">1,065.578</text><text text-anchor="middle" x="134" y="70.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="none" stroke-width="0" fill="#375a84">1,065.578</text></g><rect x="106" y="60" width="56" height="12" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect></g></g><g><g><rect x="250.5" y="193.5" width="52" height="14" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g><text text-anchor="middle" x="276" y="204.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="#ffffff" stroke-width="3" fill="#863837" aria-hidden="true">530.584</text><text text-anchor="middle" x="276" y="204.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="none" stroke-width="0" fill="#863837">530.584</text></g><rect x="252.5" y="194" width="47" height="12" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect></g></g><g><g><rect x="393.5" y="211.5" width="52" height="14" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g><text text-anchor="middle" x="419" y="222.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="#ffffff" stroke-width="3" fill="#6d833e" aria-hidden="true">458.049</text><text text-anchor="middle" x="419" y="222.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="none" stroke-width="0" fill="#6d833e">458.049</text></g><rect x="395.5" y="212" width="47" height="12" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect></g></g><g><g><rect x="536.5" y="214.5" width="52" height="14" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g><text text-anchor="middle" x="562" y="225.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="#ffffff" stroke-width="3" fill="#198577" aria-hidden="true">443.555</text><text text-anchor="middle" x="562" y="225.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="none" stroke-width="0" fill="#198577">443.555</text></g><rect x="538.5" y="215" width="47" height="12" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect></g></g><g><g><rect x="681.5" y="248.5" width="46" height="14" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g><text text-anchor="middle" x="704" y="259.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="#ffffff" stroke-width="3" fill="#5a4671" aria-hidden="true">309.84</text><text text-anchor="middle" x="704" y="259.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="none" stroke-width="0" fill="#5a4671">309.84</text></g><rect x="684" y="249" width="40" height="12" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect></g></g><g><g><rect x="822.5" y="248.5" width="50" height="14" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g><text text-anchor="middle" x="847" y="259.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="#ffffff" stroke-width="3" fill="#34788a" aria-hidden="true">309.712</text><text text-anchor="middle" x="847" y="259.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="none" stroke-width="0" fill="#34788a">309.712</text></g><rect x="824.5" y="249" width="45" height="12" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect></g></g><g><g><rect x="964.5" y="269.5" width="52" height="14" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g><text text-anchor="middle" x="990" y="280.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="#ffffff" stroke-width="3" fill="#ad6932" aria-hidden="true">225.953</text><text text-anchor="middle" x="990" y="280.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="none" stroke-width="0" fill="#ad6932">225.953</text></g><rect x="966.5" y="270" width="47" height="12" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect></g></g><g><g><rect x="1108.5" y="269.5" width="50" height="14" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g><text text-anchor="middle" x="1133" y="280.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="#ffffff" stroke-width="3" fill="#5a425e" aria-hidden="true">224.691</text><text text-anchor="middle" x="1133" y="280.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="none" stroke-width="0" fill="#5a425e">224.691</text></g><rect x="1110.5" y="270" width="45" height="12" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect></g></g><g><g><rect x="1249.5" y="275.5" width="52" height="14" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g><text text-anchor="middle" x="1275" y="286.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="#ffffff" stroke-width="3" fill="#537023" aria-hidden="true">202.439</text><text text-anchor="middle" x="1275" y="286.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="none" stroke-width="0" fill="#537023">202.439</text></g><rect x="1251.5" y="276" width="47" height="12" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect></g></g><g><g><rect x="1393.5" y="276.5" width="50" height="14" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g><text text-anchor="middle" x="1418" y="287.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="#ffffff" stroke-width="3" fill="#243c61" aria-hidden="true">196.078</text><text text-anchor="middle" x="1418" y="287.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="none" stroke-width="0" fill="#243c61">196.078</text></g><rect x="1395.5" y="277" width="45" height="12" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect></g></g></g></g><g></g></svg><div aria-label="A tabular representation of the data in the chart." style="position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden;"><table><thead><tr><th>Suite</th><th>Elapsed Time (s) </th></tr></thead><tbody><tr><td>NavLinks</td><td>1,065.578</td></tr><tr><td>Footer</td><td>530.584</td></tr><tr><td>Tag</td><td>458.049</td></tr><tr><td>UserRegistrationFlows</td><td>443.555</td></tr><tr><td>EditProfile+acc</td><td>309.84</td></tr><tr><td>UserRegistrationFlows+account</td><td>309.712</td></tr><tr><td>SignUp</td><td>225.953</td></tr><tr><td>RegisteredUserFlows</td><td>224.691</td></tr><tr><td>ProgressiveProfiling</td><td>202.439</td></tr><tr><td>FormSubmissionLoggedIn</td><td>196.078</td></tr></tbody></table></div></div></div><div aria-hidden="true" style="display: none; position: absolute; top: 410px; left: 1562px; white-space: nowrap; font-family: &quot;Comic Sans MS&quot;; font-size: 12px; font-style: italic;">196.078</div><div></div></div></div>
+     </div>
+    </div>
+    <hr>
+    <div class="row rowcard">
+     <div class="col-md-12" style="height:450px;width:auto;">
+      <span style="font-weight:bold;color:gray">
+       Top 10 Test Performance(sec):
+      </span>
+      <div id="testsBarID" style="height:400px;width:auto;"><div style="position: relative;"><div dir="ltr" style="position: relative; width: 1552px; height: 400px;"><div aria-label="A chart." style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%;"><svg width="1552" height="400" aria-label="A chart." style="overflow: hidden;"><defs id="_ABSTRACT_RENDERER_ID_4"><clippath id="_ABSTRACT_RENDERER_ID_5"><rect x="62" y="50" width="1428" height="300"></rect></clippath></defs><rect x="0" y="0" width="1552" height="400" stroke="none" stroke-width="0" fill="#ffffff"></rect><g><rect x="62" y="50" width="1428" height="300" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g clip-path="url(file:///Users/jorgecampos/VCS%20PROJECTS/SN%20Framework/robot-automation-framework/metrics-20220202-112926.html#_ABSTRACT_RENDERER_ID_5)"><g><rect x="62" y="349" width="1428" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="62" y="316" width="1428" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="62" y="283" width="1428" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="62" y="249" width="1428" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="62" y="216" width="1428" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="62" y="183" width="1428" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="62" y="150" width="1428" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="62" y="116" width="1428" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="62" y="83" width="1428" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="62" y="50" width="1428" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="62" y="332" width="1428" height="1" stroke="none" stroke-width="0" fill="#ebebeb"></rect><rect x="62" y="299" width="1428" height="1" stroke="none" stroke-width="0" fill="#ebebeb"></rect><rect x="62" y="266" width="1428" height="1" stroke="none" stroke-width="0" fill="#ebebeb"></rect><rect x="62" y="233" width="1428" height="1" stroke="none" stroke-width="0" fill="#ebebeb"></rect><rect x="62" y="200" width="1428" height="1" stroke="none" stroke-width="0" fill="#ebebeb"></rect><rect x="62" y="166" width="1428" height="1" stroke="none" stroke-width="0" fill="#ebebeb"></rect><rect x="62" y="133" width="1428" height="1" stroke="none" stroke-width="0" fill="#ebebeb"></rect><rect x="62" y="100" width="1428" height="1" stroke="none" stroke-width="0" fill="#ebebeb"></rect><rect x="62" y="67" width="1428" height="1" stroke="none" stroke-width="0" fill="#ebebeb"></rect></g><g><rect x="70" y="53" width="128" height="296" stroke="#4f81bc" stroke-width="1" fill="#4f81bc"></rect><rect x="212" y="103" width="129" height="246" stroke="#c0504e" stroke-width="1" fill="#c0504e"></rect><rect x="355" y="130" width="128" height="219" stroke="#9bbb58" stroke-width="1" fill="#9bbb58"></rect><rect x="498" y="194" width="128" height="155" stroke="#24beaa" stroke-width="1" fill="#24beaa"></rect><rect x="640" y="200" width="129" height="149" stroke="#8064a1" stroke-width="1" fill="#8064a1"></rect><rect x="783" y="203" width="129" height="146" stroke="#4aacc5" stroke-width="1" fill="#4aacc5"></rect><rect x="926" y="210" width="128" height="139" stroke="#f79647" stroke-width="1" fill="#f79647"></rect><rect x="1069" y="212" width="128" height="137" stroke="#815e86" stroke-width="1" fill="#815e86"></rect><rect x="1211" y="230" width="129" height="119" stroke="#76a032" stroke-width="1" fill="#76a032"></rect><rect x="1354" y="235" width="128" height="114" stroke="#34558b" stroke-width="1" fill="#34558b"></rect></g><g><rect x="62" y="349" width="1428" height="1" stroke="none" stroke-width="0" fill="#333333"></rect></g><g><rect x="134" y="53" width="1" height="12" stroke="none" stroke-width="0" fill="#999999"></rect><rect x="276" y="91" width="1" height="12" stroke="none" stroke-width="0" fill="#999999"></rect><rect x="419" y="118" width="1" height="12" stroke="none" stroke-width="0" fill="#999999"></rect><rect x="562" y="182" width="1" height="12" stroke="none" stroke-width="0" fill="#999999"></rect><rect x="704" y="188" width="1" height="12" stroke="none" stroke-width="0" fill="#999999"></rect><rect x="847" y="191" width="1" height="12" stroke="none" stroke-width="0" fill="#999999"></rect><rect x="990" y="198" width="1" height="12" stroke="none" stroke-width="0" fill="#999999"></rect><rect x="1133" y="200" width="1" height="12" stroke="none" stroke-width="0" fill="#999999"></rect><rect x="1275" y="218" width="1" height="12" stroke="none" stroke-width="0" fill="#999999"></rect><rect x="1418" y="223" width="1" height="12" stroke="none" stroke-width="0" fill="#999999"></rect></g></g><g></g><g><g><text text-anchor="middle" x="133.85" y="364.5" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#222222">Run NavLink Tests - DE</text></g><g><text text-anchor="middle" x="276.54999999999995" y="364.5" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#222222">Run NavLink Tests - FR</text></g><g><text text-anchor="middle" x="419.25" y="364.5" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#222222">Run NavLink Tests - NL</text></g><g><text text-anchor="middle" x="561.9499999999999" y="364.5" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#222222">Run Footer Tests - DE</text></g><g><text text-anchor="middle" x="704.65" y="364.5" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#222222">Run NavLink Tests - UK</text></g><g><text text-anchor="middle" x="847.3499999999999" y="364.5" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#222222">Run NavLink Tests - US</text></g><g><text text-anchor="middle" x="990.05" y="364.5" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#222222">Run Footer Tests - FR</text></g><g><text text-anchor="middle" x="1132.75" y="364.5" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#222222">Run Footer Tests - US</text></g><g><text text-anchor="middle" x="1275.4499999999998" y="364.5" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#222222">Run Footer Tests - UK</text></g><g><text text-anchor="middle" x="1418.1499999999999" y="364.5" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#222222">Run Tag Tests - NL</text></g><g><text text-anchor="end" x="52" y="353" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#444444">0</text></g><g><text text-anchor="end" x="52" y="319.7778" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#444444">100</text></g><g><text text-anchor="end" x="52" y="286.5556" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#444444">200</text></g><g><text text-anchor="end" x="52" y="253.3333" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#444444">300</text></g><g><text text-anchor="end" x="52" y="220.1111" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#444444">400</text></g><g><text text-anchor="end" x="52" y="186.8889" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#444444">500</text></g><g><text text-anchor="end" x="52" y="153.6667" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#444444">600</text></g><g><text text-anchor="end" x="52" y="120.4444" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#444444">700</text></g><g><text text-anchor="end" x="52" y="87.2222" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#444444">800</text></g><g><text text-anchor="end" x="52" y="54" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#444444">900</text></g></g><g><g><g><rect x="109.5" y="64.5" width="50" height="14" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g><text text-anchor="middle" x="134" y="75.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="#ffffff" stroke-width="3" fill="#375a84" aria-hidden="true">892.812</text><text text-anchor="middle" x="134" y="75.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="none" stroke-width="0" fill="#375a84">892.812</text></g><rect x="111.5" y="65" width="45" height="12" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect></g></g><g><g><rect x="250.5" y="78.5" width="52" height="14" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g><text text-anchor="middle" x="276" y="89.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="#ffffff" stroke-width="3" fill="#863837" aria-hidden="true">744.226</text><text text-anchor="middle" x="276" y="89.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="none" stroke-width="0" fill="#863837">744.226</text></g><rect x="252.5" y="79" width="47" height="12" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect></g></g><g><g><rect x="394.5" y="105.5" width="50" height="14" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g><text text-anchor="middle" x="419" y="116.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="#ffffff" stroke-width="3" fill="#6d833e" aria-hidden="true">662.137</text><text text-anchor="middle" x="419" y="116.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="none" stroke-width="0" fill="#6d833e">662.137</text></g><rect x="396.5" y="106" width="45" height="12" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect></g></g><g><g><rect x="536.5" y="169.5" width="52" height="14" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g><text text-anchor="middle" x="562" y="180.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="#ffffff" stroke-width="3" fill="#198577" aria-hidden="true">470.744</text><text text-anchor="middle" x="562" y="180.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="none" stroke-width="0" fill="#198577">470.744</text></g><rect x="538.5" y="170" width="47" height="12" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect></g></g><g><g><rect x="678.5" y="175.5" width="52" height="14" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g><text text-anchor="middle" x="704" y="186.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="#ffffff" stroke-width="3" fill="#5a4671" aria-hidden="true">452.849</text><text text-anchor="middle" x="704" y="186.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="none" stroke-width="0" fill="#5a4671">452.849</text></g><rect x="680.5" y="176" width="47" height="12" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect></g></g><g><g><rect x="821.5" y="178.5" width="52" height="14" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g><text text-anchor="middle" x="847" y="189.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="#ffffff" stroke-width="3" fill="#34788a" aria-hidden="true">442.303</text><text text-anchor="middle" x="847" y="189.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="none" stroke-width="0" fill="#34788a">442.303</text></g><rect x="823.5" y="179" width="47" height="12" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect></g></g><g><g><rect x="965.5" y="185.5" width="50" height="14" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g><text text-anchor="middle" x="990" y="196.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="#ffffff" stroke-width="3" fill="#ad6932" aria-hidden="true">421.252</text><text text-anchor="middle" x="990" y="196.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="none" stroke-width="0" fill="#ad6932">421.252</text></g><rect x="967.5" y="186" width="45" height="12" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect></g></g><g><g><rect x="1108.5" y="187.5" width="50" height="14" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g><text text-anchor="middle" x="1133" y="198.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="#ffffff" stroke-width="3" fill="#5a425e" aria-hidden="true">414.473</text><text text-anchor="middle" x="1133" y="198.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="none" stroke-width="0" fill="#5a425e">414.473</text></g><rect x="1110.5" y="188" width="45" height="12" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect></g></g><g><g><rect x="1250.5" y="205.5" width="50" height="14" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g><text text-anchor="middle" x="1275" y="216.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="#ffffff" stroke-width="3" fill="#537023" aria-hidden="true">361.782</text><text text-anchor="middle" x="1275" y="216.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="none" stroke-width="0" fill="#537023">361.782</text></g><rect x="1252.5" y="206" width="45" height="12" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect></g></g><g><g><rect x="1393.5" y="210.5" width="50" height="14" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g><text text-anchor="middle" x="1418" y="221.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="#ffffff" stroke-width="3" fill="#243c61" aria-hidden="true">345.167</text><text text-anchor="middle" x="1418" y="221.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="none" stroke-width="0" fill="#243c61">345.167</text></g><rect x="1395.5" y="211" width="45" height="12" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect></g></g></g></g><g></g></svg><div aria-label="A tabular representation of the data in the chart." style="position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden;"><table><thead><tr><th>Test</th><th>Elapsed Time (s) </th></tr></thead><tbody><tr><td>Run NavLink Tests - DE</td><td>892.812</td></tr><tr><td>Run NavLink Tests - FR</td><td>744.226</td></tr><tr><td>Run NavLink Tests - NL</td><td>662.137</td></tr><tr><td>Run Footer Tests - DE</td><td>470.744</td></tr><tr><td>Run NavLink Tests - UK</td><td>452.849</td></tr><tr><td>Run NavLink Tests - US</td><td>442.303</td></tr><tr><td>Run Footer Tests - FR</td><td>421.252</td></tr><tr><td>Run Footer Tests - US</td><td>414.473</td></tr><tr><td>Run Footer Tests - UK</td><td>361.782</td></tr><tr><td>Run Tag Tests - NL</td><td>345.167</td></tr></tbody></table></div></div></div><div aria-hidden="true" style="display: none; position: absolute; top: 410px; left: 1562px; white-space: nowrap; font-family: &quot;Comic Sans MS&quot;; font-size: 12px; font-style: italic;">345.167</div><div></div></div></div>
+     </div>
+    </div>
+    <hr>
+    <div class="row rowcard">
+     <div class="col-md-12" style="height:450px;width:auto;">
+      <span style="font-weight:bold;color:gray">
+       Top 10 Keywords Performance(sec):
+      </span>
+      <div id="keywordsBarID" style="height:400px;width:auto;"><div style="position: relative;"><div dir="ltr" style="position: relative; width: 1552px; height: 400px;"><div aria-label="A chart." style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%;"><svg width="1552" height="400" aria-label="A chart." style="overflow: hidden;"><defs id="_ABSTRACT_RENDERER_ID_7"><clippath id="_ABSTRACT_RENDERER_ID_8"><rect x="62" y="50" width="1428" height="300"></rect></clippath></defs><rect x="0" y="0" width="1552" height="400" stroke="none" stroke-width="0" fill="#ffffff"></rect><g><rect x="62" y="50" width="1428" height="300" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g clip-path="url(file:///Users/jorgecampos/VCS%20PROJECTS/SN%20Framework/robot-automation-framework/metrics-20220202-112926.html#_ABSTRACT_RENDERER_ID_8)"><g><rect x="62" y="349" width="1428" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="62" y="312" width="1428" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="62" y="274" width="1428" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="62" y="237" width="1428" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="62" y="200" width="1428" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="62" y="162" width="1428" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="62" y="125" width="1428" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="62" y="87" width="1428" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="62" y="50" width="1428" height="1" stroke="none" stroke-width="0" fill="#cccccc"></rect><rect x="62" y="330" width="1428" height="1" stroke="none" stroke-width="0" fill="#ebebeb"></rect><rect x="62" y="293" width="1428" height="1" stroke="none" stroke-width="0" fill="#ebebeb"></rect><rect x="62" y="256" width="1428" height="1" stroke="none" stroke-width="0" fill="#ebebeb"></rect><rect x="62" y="218" width="1428" height="1" stroke="none" stroke-width="0" fill="#ebebeb"></rect><rect x="62" y="181" width="1428" height="1" stroke="none" stroke-width="0" fill="#ebebeb"></rect><rect x="62" y="143" width="1428" height="1" stroke="none" stroke-width="0" fill="#ebebeb"></rect><rect x="62" y="106" width="1428" height="1" stroke="none" stroke-width="0" fill="#ebebeb"></rect><rect x="62" y="69" width="1428" height="1" stroke="none" stroke-width="0" fill="#ebebeb"></rect></g><g><rect x="70" y="79" width="128" height="270" stroke="#4f81bc" stroke-width="1" fill="#4f81bc"></rect><rect x="212" y="100" width="129" height="249" stroke="#c0504e" stroke-width="1" fill="#c0504e"></rect><rect x="355" y="112" width="128" height="237" stroke="#9bbb58" stroke-width="1" fill="#9bbb58"></rect><rect x="498" y="118" width="128" height="231" stroke="#24beaa" stroke-width="1" fill="#24beaa"></rect><rect x="640" y="119" width="129" height="230" stroke="#8064a1" stroke-width="1" fill="#8064a1"></rect><rect x="783" y="129" width="129" height="220" stroke="#4aacc5" stroke-width="1" fill="#4aacc5"></rect><rect x="926" y="241" width="128" height="108" stroke="#f79647" stroke-width="1" fill="#f79647"></rect><rect x="1069" y="243" width="128" height="106" stroke="#815e86" stroke-width="1" fill="#815e86"></rect><rect x="1211" y="253" width="129" height="96" stroke="#76a032" stroke-width="1" fill="#76a032"></rect><rect x="1354" y="257" width="128" height="92" stroke="#34558b" stroke-width="1" fill="#34558b"></rect></g><g><rect x="62" y="349" width="1428" height="1" stroke="none" stroke-width="0" fill="#333333"></rect></g><g><rect x="134" y="67" width="1" height="12" stroke="none" stroke-width="0" fill="#999999"></rect><rect x="276" y="88" width="1" height="12" stroke="none" stroke-width="0" fill="#999999"></rect><rect x="419" y="100" width="1" height="12" stroke="none" stroke-width="0" fill="#999999"></rect><rect x="562" y="106" width="1" height="12" stroke="none" stroke-width="0" fill="#999999"></rect><rect x="704" y="107" width="1" height="12" stroke="none" stroke-width="0" fill="#999999"></rect><rect x="847" y="117" width="1" height="12" stroke="none" stroke-width="0" fill="#999999"></rect><rect x="990" y="229" width="1" height="12" stroke="none" stroke-width="0" fill="#999999"></rect><rect x="1133" y="231" width="1" height="12" stroke="none" stroke-width="0" fill="#999999"></rect><rect x="1275" y="241" width="1" height="12" stroke="none" stroke-width="0" fill="#999999"></rect><rect x="1418" y="245" width="1" height="12" stroke="none" stroke-width="0" fill="#999999"></rect></g></g><g></g><g><g><text text-anchor="middle" x="133.85" y="364.5" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#222222">Solutions Links</text></g><g><text text-anchor="middle" x="276.54999999999995" y="364.5" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#222222">Validate Given Links</text></g><g><text text-anchor="middle" x="419.25" y="364.5" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#222222">Solutions Links</text></g><g><text text-anchor="middle" x="561.9499999999999" y="364.5" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#222222">Solutions Links</text></g><g><text text-anchor="middle" x="704.65" y="364.5" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#222222">Validate Given Links</text></g><g><text text-anchor="middle" x="847.3499999999999" y="364.5" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#222222">Validate Given Links</text></g><g><text text-anchor="middle" x="990.05" y="364.5" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#222222">Validate Language Dropdown</text><text text-anchor="middle" x="990.05" y="377.5" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#222222">Links</text></g><g><text text-anchor="middle" x="1132.75" y="364.5" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#222222">Solutions Links</text></g><g><text text-anchor="middle" x="1275.4499999999998" y="364.5" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#222222">Validate Language Dropdown</text><text text-anchor="middle" x="1275.4499999999998" y="377.5" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#222222">Links</text></g><g><text text-anchor="middle" x="1418.1499999999999" y="364.5" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#222222">Validate Given Links</text></g><g><text text-anchor="end" x="52" y="353" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#444444">0</text></g><g><text text-anchor="end" x="52" y="315.625" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#444444">100</text></g><g><text text-anchor="end" x="52" y="278.25" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#444444">200</text></g><g><text text-anchor="end" x="52" y="240.875" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#444444">300</text></g><g><text text-anchor="end" x="52" y="203.5" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#444444">400</text></g><g><text text-anchor="end" x="52" y="166.125" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#444444">500</text></g><g><text text-anchor="end" x="52" y="128.75" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#444444">600</text></g><g><text text-anchor="end" x="52" y="91.375" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#444444">700</text></g><g><text text-anchor="end" x="52" y="54" font-family="Comic Sans MS" font-size="10" stroke="none" stroke-width="0" fill="#444444">800</text></g></g><g><g><g><rect x="108.5" y="54.5" width="52" height="14" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g><text text-anchor="middle" x="134" y="65.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="#ffffff" stroke-width="3" fill="#375a84" aria-hidden="true">725.876</text><text text-anchor="middle" x="134" y="65.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="none" stroke-width="0" fill="#375a84">725.876</text></g><rect x="110.5" y="55" width="47" height="12" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect></g></g><g><g><rect x="250.5" y="75.5" width="52" height="14" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g><text text-anchor="middle" x="276" y="86.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="#ffffff" stroke-width="3" fill="#863837" aria-hidden="true">669.898</text><text text-anchor="middle" x="276" y="86.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="none" stroke-width="0" fill="#863837">669.898</text></g><rect x="252.5" y="76" width="47" height="12" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect></g></g><g><g><rect x="393.5" y="87.5" width="52" height="14" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g><text text-anchor="middle" x="419" y="98.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="#ffffff" stroke-width="3" fill="#6d833e" aria-hidden="true">636.785</text><text text-anchor="middle" x="419" y="98.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="none" stroke-width="0" fill="#6d833e">636.785</text></g><rect x="395.5" y="88" width="47" height="12" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect></g></g><g><g><rect x="538.5" y="93.5" width="48" height="14" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g><text text-anchor="middle" x="562" y="104.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="#ffffff" stroke-width="3" fill="#198577" aria-hidden="true">619.961</text><text text-anchor="middle" x="562" y="104.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="none" stroke-width="0" fill="#198577">619.961</text></g><rect x="540.5" y="94" width="43" height="12" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect></g></g><g><g><rect x="679.5" y="94.5" width="50" height="14" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g><text text-anchor="middle" x="704" y="105.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="#ffffff" stroke-width="3" fill="#5a4671" aria-hidden="true">616.862</text><text text-anchor="middle" x="704" y="105.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="none" stroke-width="0" fill="#5a4671">616.862</text></g><rect x="681.5" y="95" width="45" height="12" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect></g></g><g><g><rect x="821.5" y="104.5" width="52" height="14" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g><text text-anchor="middle" x="847" y="115.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="#ffffff" stroke-width="3" fill="#34788a" aria-hidden="true">590.899</text><text text-anchor="middle" x="847" y="115.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="none" stroke-width="0" fill="#34788a">590.899</text></g><rect x="823.5" y="105" width="47" height="12" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect></g></g><g><g><rect x="967.5" y="216.5" width="46" height="14" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g><text text-anchor="middle" x="990" y="227.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="#ffffff" stroke-width="3" fill="#ad6932" aria-hidden="true">292.26</text><text text-anchor="middle" x="990" y="227.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="none" stroke-width="0" fill="#ad6932">292.26</text></g><rect x="970" y="217" width="40" height="12" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect></g></g><g><g><rect x="1110.5" y="218.5" width="46" height="14" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g><text text-anchor="middle" x="1133" y="229.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="#ffffff" stroke-width="3" fill="#5a425e" aria-hidden="true">286.66</text><text text-anchor="middle" x="1133" y="229.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="none" stroke-width="0" fill="#5a425e">286.66</text></g><rect x="1113" y="219" width="40" height="12" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect></g></g><g><g><rect x="1249.5" y="228.5" width="52" height="14" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g><text text-anchor="middle" x="1275" y="239.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="#ffffff" stroke-width="3" fill="#537023" aria-hidden="true">260.436</text><text text-anchor="middle" x="1275" y="239.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="none" stroke-width="0" fill="#537023">260.436</text></g><rect x="1251.5" y="229" width="47" height="12" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect></g></g><g><g><rect x="1392.5" y="232.5" width="52" height="14" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect><g><text text-anchor="middle" x="1418" y="243.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="#ffffff" stroke-width="3" fill="#243c61" aria-hidden="true">248.572</text><text text-anchor="middle" x="1418" y="243.2" font-family="Comic Sans MS" font-size="12" font-style="italic" stroke="none" stroke-width="0" fill="#243c61">248.572</text></g><rect x="1394.5" y="233" width="47" height="12" stroke="none" stroke-width="0" fill-opacity="0" fill="#ffffff"></rect></g></g></g></g><g></g></svg><div aria-label="A tabular representation of the data in the chart." style="position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden;"><table><thead><tr><th>Keyword</th><th>Elapsed Time (s) </th></tr></thead><tbody><tr><td>Solutions Links</td><td>725.876</td></tr><tr><td>Validate Given Links</td><td>669.898</td></tr><tr><td>Solutions Links</td><td>636.785</td></tr><tr><td>Solutions Links</td><td>619.961</td></tr><tr><td>Validate Given Links</td><td>616.862</td></tr><tr><td>Validate Given Links</td><td>590.899</td></tr><tr><td>Validate Language Dropdown Links</td><td>292.26</td></tr><tr><td>Solutions Links</td><td>286.66</td></tr><tr><td>Validate Language Dropdown Links</td><td>260.436</td></tr><tr><td>Validate Given Links</td><td>248.572</td></tr></tbody></table></div></div></div><div aria-hidden="true" style="display: none; position: absolute; top: 410px; left: 1562px; white-space: nowrap; font-family: &quot;Comic Sans MS&quot;; font-size: 12px; font-style: italic;">248.572</div><div></div></div></div>
+     </div>
+    </div>
+    <div class="row">
+     <div class="col-md-12" style="height:25px;width:auto;">
+      <p class="text-muted" style="text-align:center;font-size:9px">
+       <a href="https://github.com/adiralashiva8/robotframework-metrics" style="color:gray" target="_blank">
+        robotframework-metrics
+       </a>
+      </p>
+     </div>
+    </div>
+    <script>
+     window.onload = function(){
+                executeDataTable('#sm',6);
+                executeDataTable('#tm',3);
+                executeDataTable('#km',3);
+                createPieChart(9,19,0,'suiteChartID','Suite Status:');
+                createBarGraph('#sm',0,6,10,'suiteBarID','Elapsed Time (s) ','Suite');
+                createPieChart(30,63,0,'testChartID','Tests Status:');
+                createBarGraph('#tm',1,3,10,'testsBarID','Elapsed Time (s) ','Test');
+                createPieChart(3993,134,743,'keywordChartID','Keywords Status:');
+                createBarGraph('#km',1,3,10,'keywordsBarID','Elapsed Time (s) ','Keyword');
+            };
+    </script>
+    <script>
+     function openInNewTab(url,element_id) {
+                var element_id= element_id;
+                var win = window.open(url, '_blank');
+                win.focus();
+                $('body').scrollTo(element_id);
+            }
+    </script>
+   </div>
+  </div>
+  <div class="tabcontent" id="suiteMetrics" style="display: none;">
+   <h4>
+    <b>
+     <i class="fa fa-table">
+     </i>
+     Suite Metrics
+    </b>
+   </h4>
+   <hr>
+   <div id="sm_wrapper" class="dataTables_wrapper no-footer"><div class="dataTables_length" id="sm_length"><label>Show <select name="sm_length" aria-controls="sm" class=""><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div><div id="" class="margin"><div class="dt-buttons">          <button class="dt-button buttons-copy buttons-html5" tabindex="0" aria-controls="sm" type="button" title="Copy"><span><i class="fa fa-files-o"></i></span></button> <button class="dt-button buttons-csv buttons-html5" tabindex="0" aria-controls="sm" type="button" title="CSV"><span><i class="fa fa-file-text-o"></i></span></button> <button class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="sm" type="button" title="Excel"><span><i class="fa fa-file-excel-o"></i></span></button> <button class="dt-button buttons-print" tabindex="0" aria-controls="sm" type="button" title="Print"><span><i class="fa fa-print"></i></span></button> <button class="dt-button buttons-collection buttons-colvis" tabindex="0" aria-controls="sm" type="button" title="Hide Column" aria-haspopup="true"><span><i class="fa fa-low-vision"></i></span></button> </div></div><div id="sm_filter" class="dataTables_filter"><label>Search:<input type="search" class="" placeholder="" aria-controls="sm"></label></div><table class="table row-border tablecard dataTable no-footer" id="sm" role="grid" aria-describedby="sm_info">
+    <thead>
+     <tr role="row"><th class="sorting" tabindex="0" aria-controls="sm" rowspan="1" colspan="1" aria-label="
+       Suite Name
+      : activate to sort column ascending" style="width: 0px;">
+       Suite Name
+      </th><th class="sorting" tabindex="0" aria-controls="sm" rowspan="1" colspan="1" aria-label="
+       Status
+      : activate to sort column ascending" style="width: 0px;">
+       Status
+      </th><th class="sorting" tabindex="0" aria-controls="sm" rowspan="1" colspan="1" aria-label="
+       Total
+      : activate to sort column ascending" style="width: 0px;">
+       Total
+      </th><th class="sorting" tabindex="0" aria-controls="sm" rowspan="1" colspan="1" aria-label="
+       Pass
+      : activate to sort column ascending" style="width: 0px;">
+       Pass
+      </th><th class="sorting" tabindex="0" aria-controls="sm" rowspan="1" colspan="1" aria-label="
+       Fail
+      : activate to sort column ascending" style="width: 0px;">
+       Fail
+      </th><th class="sorting" tabindex="0" aria-controls="sm" rowspan="1" colspan="1" aria-label="
+       Fail
+      : activate to sort column ascending" style="width: 0px;">
+       Fail
+      </th><th class="sorting_desc" tabindex="0" aria-controls="sm" rowspan="1" colspan="1" aria-sort="descending" aria-label="
+       Time (s)
+      : activate to sort column ascending" style="width: 0px;">
+       Time (s)
+      </th></tr>
+    </thead>
+    <tbody>
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+    <tr role="row" class="odd">
+      <td data-toggle="tooltip" onclick="openInNewTab(&#39;log.html#s1-s7-s2&#39;,&#39;#s1-s7-s2&#39;)" style="word-wrap: break-word;max-width: 250px; white-space: normal;cursor: pointer; color:blue; text-align:left" title="Click to view &#39;NavLinks&#39; logs">
+       NavLinks
+      </td>
+      <td style="color: red">
+       FAIL
+      </td>
+      <td>
+       5
+      </td>
+      <td style="color: green">
+       2
+      </td>
+      <td style="color: red">
+       3
+      </td>
+      <td style="color: orange">0</td>
+      <td class="sorting_1">1065.578</td>
+     </tr><tr role="row" class="even">
+      <td data-toggle="tooltip" onclick="openInNewTab(&#39;log.html#s1-s7-s1&#39;,&#39;#s1-s7-s1&#39;)" style="word-wrap: break-word;max-width: 250px; white-space: normal;cursor: pointer; color:blue; text-align:left" title="Click to view &#39;Footer&#39; logs">
+       Footer
+      </td>
+      <td style="color: red">
+       FAIL
+      </td>
+      <td>
+       5
+      </td>
+      <td style="color: green">
+       3
+      </td>
+      <td style="color: red">
+       2
+      </td>
+      <td style="color: orange">0</td>
+      <td class="sorting_1">530.584</td>
+     </tr><tr role="row" class="odd">
+      <td data-toggle="tooltip" onclick="openInNewTab(&#39;log.html#s1-s7-s3&#39;,&#39;#s1-s7-s3&#39;)" style="word-wrap: break-word;max-width: 250px; white-space: normal;cursor: pointer; color:blue; text-align:left" title="Click to view &#39;Tag&#39; logs">
+       Tag
+      </td>
+      <td style="color: red">
+       FAIL
+      </td>
+      <td>
+       5
+      </td>
+      <td style="color: green">
+       1
+      </td>
+      <td style="color: red">
+       4
+      </td>
+      <td style="color: orange">0</td>
+      <td class="sorting_1">458.049</td>
+     </tr><tr role="row" class="even">
+      <td data-toggle="tooltip" onclick="openInNewTab(&#39;log.html#s1-s4-s2&#39;,&#39;#s1-s4-s2&#39;)" style="word-wrap: break-word;max-width: 250px; white-space: normal;cursor: pointer; color:blue; text-align:left" title="Click to view &#39;UserRegistrationFlows&#39; logs">
+       UserRegistrationFlows
+      </td>
+      <td style="color: red">
+       FAIL
+      </td>
+      <td>
+       15
+      </td>
+      <td style="color: green">
+       2
+      </td>
+      <td style="color: red">
+       13
+      </td>
+      <td style="color: orange">0</td>
+      <td class="sorting_1">443.555</td>
+     </tr><tr role="row" class="odd">
+      <td data-toggle="tooltip" onclick="openInNewTab(&#39;log.html#s1-s6-s2&#39;,&#39;#s1-s6-s2&#39;)" style="word-wrap: break-word;max-width: 250px; white-space: normal;cursor: pointer; color:blue; text-align:left" title="Click to view &#39;EditProfile+acc&#39; logs">
+       EditProfile+acc
+      </td>
+      <td style="color: red">
+       FAIL
+      </td>
+      <td>
+       1
+      </td>
+      <td style="color: green">
+       0
+      </td>
+      <td style="color: red">
+       1
+      </td>
+      <td style="color: orange">0</td>
+      <td class="sorting_1">309.84</td>
+     </tr><tr role="row" class="even">
+      <td data-toggle="tooltip" onclick="openInNewTab(&#39;log.html#s1-s4-s3&#39;,&#39;#s1-s4-s3&#39;)" style="word-wrap: break-word;max-width: 250px; white-space: normal;cursor: pointer; color:blue; text-align:left" title="Click to view &#39;UserRegistrationFlows+account&#39; logs">
+       UserRegistrationFlows+account
+      </td>
+      <td style="color: red">
+       FAIL
+      </td>
+      <td>
+       12
+      </td>
+      <td style="color: green">
+       1
+      </td>
+      <td style="color: red">
+       11
+      </td>
+      <td style="color: orange">0</td>
+      <td class="sorting_1">309.712</td>
+     </tr><tr role="row" class="odd">
+      <td data-toggle="tooltip" onclick="openInNewTab(&#39;log.html#s1-s6-s3&#39;,&#39;#s1-s6-s3&#39;)" style="word-wrap: break-word;max-width: 250px; white-space: normal;cursor: pointer; color:blue; text-align:left" title="Click to view &#39;SignUp&#39; logs">
+       SignUp
+      </td>
+      <td style="color: red">
+       FAIL
+      </td>
+      <td>
+       1
+      </td>
+      <td style="color: green">
+       0
+      </td>
+      <td style="color: red">
+       1
+      </td>
+      <td style="color: orange">0</td>
+      <td class="sorting_1">225.953</td>
+     </tr><tr role="row" class="even">
+      <td data-toggle="tooltip" onclick="openInNewTab(&#39;log.html#s1-s4-s1&#39;,&#39;#s1-s4-s1&#39;)" style="word-wrap: break-word;max-width: 250px; white-space: normal;cursor: pointer; color:blue; text-align:left" title="Click to view &#39;RegisteredUserFlows&#39; logs">
+       RegisteredUserFlows
+      </td>
+      <td style="color: red">
+       FAIL
+      </td>
+      <td>
+       3
+      </td>
+      <td style="color: green">
+       0
+      </td>
+      <td style="color: red">
+       3
+      </td>
+      <td style="color: orange">0</td>
+      <td class="sorting_1">224.691</td>
+     </tr><tr role="row" class="odd">
+      <td data-toggle="tooltip" onclick="openInNewTab(&#39;log.html#s1-s2-s4&#39;,&#39;#s1-s2-s4&#39;)" style="word-wrap: break-word;max-width: 250px; white-space: normal;cursor: pointer; color:blue; text-align:left" title="Click to view &#39;ProgressiveProfiling&#39; logs">
+       ProgressiveProfiling
+      </td>
+      <td style="color: red">
+       FAIL
+      </td>
+      <td>
+       2
+      </td>
+      <td style="color: green">
+       0
+      </td>
+      <td style="color: red">
+       2
+      </td>
+      <td style="color: orange">0</td>
+      <td class="sorting_1">202.439</td>
+     </tr><tr role="row" class="even">
+      <td data-toggle="tooltip" onclick="openInNewTab(&#39;log.html#s1-s2-s1&#39;,&#39;#s1-s2-s1&#39;)" style="word-wrap: break-word;max-width: 250px; white-space: normal;cursor: pointer; color:blue; text-align:left" title="Click to view &#39;FormSubmissionLoggedIn&#39; logs">
+       FormSubmissionLoggedIn
+      </td>
+      <td style="color: red">
+       FAIL
+      </td>
+      <td>
+       5
+      </td>
+      <td style="color: green">
+       0
+      </td>
+      <td style="color: red">
+       5
+      </td>
+      <td style="color: orange">0</td>
+      <td class="sorting_1">196.078</td>
+     </tr></tbody>
+   </table><div class="dataTables_info" id="sm_info" role="status" aria-live="polite">Showing 1 to 10 of 28 entries</div><div class="dataTables_paginate paging_simple_numbers" id="sm_paginate"><a class="paginate_button previous disabled" aria-controls="sm" data-dt-idx="0" tabindex="0" id="sm_previous">Previous</a><span><a class="paginate_button current" aria-controls="sm" data-dt-idx="1" tabindex="0">1</a><a class="paginate_button " aria-controls="sm" data-dt-idx="2" tabindex="0">2</a><a class="paginate_button " aria-controls="sm" data-dt-idx="3" tabindex="0">3</a></span><a class="paginate_button next" aria-controls="sm" data-dt-idx="4" tabindex="0" id="sm_next">Next</a></div></div>
+   <div class="row">
+    <div class="col-md-12" style="height:25px;width:auto;">
+    </div>
+   </div>
+  </div>
+  <div class="tabcontent" id="testMetrics" style="display: none;">
+   <h4>
+    <b>
+     <i class="fa fa-table">
+     </i>
+     Test Metrics
+    </b>
+   </h4>
+   <hr>
+   <div id="tm_wrapper" class="dataTables_wrapper no-footer"><div class="dataTables_length" id="tm_length"><label>Show <select name="tm_length" aria-controls="tm" class=""><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div><div id="" class="margin"><div class="dt-buttons">          <button class="dt-button buttons-copy buttons-html5" tabindex="0" aria-controls="tm" type="button" title="Copy"><span><i class="fa fa-files-o"></i></span></button> <button class="dt-button buttons-csv buttons-html5" tabindex="0" aria-controls="tm" type="button" title="CSV"><span><i class="fa fa-file-text-o"></i></span></button> <button class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="tm" type="button" title="Excel"><span><i class="fa fa-file-excel-o"></i></span></button> <button class="dt-button buttons-print" tabindex="0" aria-controls="tm" type="button" title="Print"><span><i class="fa fa-print"></i></span></button> <button class="dt-button buttons-collection buttons-colvis" tabindex="0" aria-controls="tm" type="button" title="Hide Column" aria-haspopup="true"><span><i class="fa fa-low-vision"></i></span></button> </div></div><div id="tm_filter" class="dataTables_filter"><label>Search:<input type="search" class="" placeholder="" aria-controls="tm"></label></div><table class="table row-border tablecard dataTable no-footer" id="tm" role="grid" aria-describedby="tm_info">
+    <thead>
+     <tr role="row"><th class="sorting" tabindex="0" aria-controls="tm" rowspan="1" colspan="1" aria-label="
+       Suite Name
+      : activate to sort column ascending" style="width: 0px;">
+       Suite Name
+      </th><th class="sorting" tabindex="0" aria-controls="tm" rowspan="1" colspan="1" aria-label="
+       Test Case
+      : activate to sort column ascending" style="width: 0px;">
+       Test Case
+      </th><th class="sorting" tabindex="0" aria-controls="tm" rowspan="1" colspan="1" aria-label="
+       Status
+      : activate to sort column ascending" style="width: 0px;">
+       Status
+      </th><th class="sorting_desc" tabindex="0" aria-controls="tm" rowspan="1" colspan="1" aria-sort="descending" aria-label="
+       Time (s)
+      : activate to sort column ascending" style="width: 0px;">
+       Time (s)
+      </th><th class="sorting" tabindex="0" aria-controls="tm" rowspan="1" colspan="1" aria-label="
+       Error Message
+      : activate to sort column ascending" style="width: 0px;">
+       Error Message
+      </th></tr>
+    </thead>
+    <tbody>
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+    <tr role="row" class="odd">
+      <td style="word-wrap: break-word;max-width: 200px; white-space: normal; text-align:left">
+       NavLinks
+      </td>
+      <td data-toggle="tooltip" onclick="openInNewTab(&#39;log.html#s1-s7-s2-t3&#39;,&#39;#s1-s7-s2-t3&#39;)" style="word-wrap: break-word;max-width: 250px; white-space: normal;cursor: pointer; color:blue; text-align:left" title="Click to view &#39;Run NavLink Tests - DE&#39; logs">
+       Run NavLink Tests - DE
+      </td>
+      <td style="color: red">
+       FAIL
+      </td>
+      <td class="sorting_1">892.812</td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: pre-wrap;text-align:left">HTTPError: 404 Client Error: Not Found for url: https://www.servicenow.de/creatorcon.html</td>
+     </tr><tr role="row" class="even">
+      <td style="word-wrap: break-word;max-width: 200px; white-space: normal; text-align:left">
+       NavLinks
+      </td>
+      <td data-toggle="tooltip" onclick="openInNewTab(&#39;log.html#s1-s7-s2-t4&#39;,&#39;#s1-s7-s2-t4&#39;)" style="word-wrap: break-word;max-width: 250px; white-space: normal;cursor: pointer; color:blue; text-align:left" title="Click to view &#39;Run NavLink Tests - FR&#39; logs">
+       Run NavLink Tests - FR
+      </td>
+      <td style="color: red">
+       FAIL
+      </td>
+      <td class="sorting_1">744.226</td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: pre-wrap;text-align:left">HTTPError: 404 Client Error: Not Found for url: https://www.servicenow.fr/creatorcon.html</td>
+     </tr><tr role="row" class="odd">
+      <td style="word-wrap: break-word;max-width: 200px; white-space: normal; text-align:left">
+       NavLinks
+      </td>
+      <td data-toggle="tooltip" onclick="openInNewTab(&#39;log.html#s1-s7-s2-t5&#39;,&#39;#s1-s7-s2-t5&#39;)" style="word-wrap: break-word;max-width: 250px; white-space: normal;cursor: pointer; color:blue; text-align:left" title="Click to view &#39;Run NavLink Tests - NL&#39; logs">
+       Run NavLink Tests - NL
+      </td>
+      <td style="color: red">
+       FAIL
+      </td>
+      <td class="sorting_1">662.137</td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: pre-wrap;text-align:left">HTTPError: 404 Client Error: Not Found for url: https://docs.servicenow.com/bundle/madrid-platform-administration/page/integrate/concept/c_IntegrateWThirdPartyAppsDataSrces.html</td>
+     </tr><tr role="row" class="even">
+      <td style="word-wrap: break-word;max-width: 200px; white-space: normal; text-align:left">
+       Footer
+      </td>
+      <td data-toggle="tooltip" onclick="openInNewTab(&#39;log.html#s1-s7-s1-t3&#39;,&#39;#s1-s7-s1-t3&#39;)" style="word-wrap: break-word;max-width: 250px; white-space: normal;cursor: pointer; color:blue; text-align:left" title="Click to view &#39;Run Footer Tests - DE&#39; logs">
+       Run Footer Tests - DE
+      </td>
+      <td style="color: red">
+       FAIL
+      </td>
+      <td class="sorting_1">470.744</td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: pre-wrap;text-align:left">ConnectionError: HTTPSConnectionPool(host='docs.servicenow.de', port=443): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.httpsconnection object="" at="" 0x7ffc09f18130="">: Failed to establish a new connection: [Errno 60] Operation timed out'))</urllib3.connection.httpsconnection></td>
+     </tr><tr role="row" class="odd">
+      <td style="word-wrap: break-word;max-width: 200px; white-space: normal; text-align:left">
+       NavLinks
+      </td>
+      <td data-toggle="tooltip" onclick="openInNewTab(&#39;log.html#s1-s7-s2-t2&#39;,&#39;#s1-s7-s2-t2&#39;)" style="word-wrap: break-word;max-width: 250px; white-space: normal;cursor: pointer; color:blue; text-align:left" title="Click to view &#39;Run NavLink Tests - UK&#39; logs">
+       Run NavLink Tests - UK
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td class="sorting_1">452.849</td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: pre-wrap;text-align:left"></td>
+     </tr><tr role="row" class="even">
+      <td style="word-wrap: break-word;max-width: 200px; white-space: normal; text-align:left">
+       NavLinks
+      </td>
+      <td data-toggle="tooltip" onclick="openInNewTab(&#39;log.html#s1-s7-s2-t1&#39;,&#39;#s1-s7-s2-t1&#39;)" style="word-wrap: break-word;max-width: 250px; white-space: normal;cursor: pointer; color:blue; text-align:left" title="Click to view &#39;Run NavLink Tests - US&#39; logs">
+       Run NavLink Tests - US
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td class="sorting_1">442.303</td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: pre-wrap;text-align:left"></td>
+     </tr><tr role="row" class="odd">
+      <td style="word-wrap: break-word;max-width: 200px; white-space: normal; text-align:left">
+       Footer
+      </td>
+      <td data-toggle="tooltip" onclick="openInNewTab(&#39;log.html#s1-s7-s1-t4&#39;,&#39;#s1-s7-s1-t4&#39;)" style="word-wrap: break-word;max-width: 250px; white-space: normal;cursor: pointer; color:blue; text-align:left" title="Click to view &#39;Run Footer Tests - FR&#39; logs">
+       Run Footer Tests - FR
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td class="sorting_1">421.252</td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: pre-wrap;text-align:left"></td>
+     </tr><tr role="row" class="even">
+      <td style="word-wrap: break-word;max-width: 200px; white-space: normal; text-align:left">
+       Footer
+      </td>
+      <td data-toggle="tooltip" onclick="openInNewTab(&#39;log.html#s1-s7-s1-t1&#39;,&#39;#s1-s7-s1-t1&#39;)" style="word-wrap: break-word;max-width: 250px; white-space: normal;cursor: pointer; color:blue; text-align:left" title="Click to view &#39;Run Footer Tests - US&#39; logs">
+       Run Footer Tests - US
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td class="sorting_1">414.473</td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: pre-wrap;text-align:left"></td>
+     </tr><tr role="row" class="odd">
+      <td style="word-wrap: break-word;max-width: 200px; white-space: normal; text-align:left">
+       Footer
+      </td>
+      <td data-toggle="tooltip" onclick="openInNewTab(&#39;log.html#s1-s7-s1-t2&#39;,&#39;#s1-s7-s1-t2&#39;)" style="word-wrap: break-word;max-width: 250px; white-space: normal;cursor: pointer; color:blue; text-align:left" title="Click to view &#39;Run Footer Tests - UK&#39; logs">
+       Run Footer Tests - UK
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td class="sorting_1">361.782</td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: pre-wrap;text-align:left"></td>
+     </tr><tr role="row" class="even">
+      <td style="word-wrap: break-word;max-width: 200px; white-space: normal; text-align:left">
+       Tag
+      </td>
+      <td data-toggle="tooltip" onclick="openInNewTab(&#39;log.html#s1-s7-s3-t5&#39;,&#39;#s1-s7-s3-t5&#39;)" style="word-wrap: break-word;max-width: 250px; white-space: normal;cursor: pointer; color:blue; text-align:left" title="Click to view &#39;Run Tag Tests - NL&#39; logs">
+       Run Tag Tests - NL
+      </td>
+      <td style="color: green">
+       PASS
+      </td>
+      <td class="sorting_1">345.167</td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: pre-wrap;text-align:left"></td>
+     </tr></tbody>
+   </table><div class="dataTables_info" id="tm_info" role="status" aria-live="polite">Showing 1 to 10 of 93 entries</div><div class="dataTables_paginate paging_simple_numbers" id="tm_paginate"><a class="paginate_button previous disabled" aria-controls="tm" data-dt-idx="0" tabindex="0" id="tm_previous">Previous</a><span><a class="paginate_button current" aria-controls="tm" data-dt-idx="1" tabindex="0">1</a><a class="paginate_button " aria-controls="tm" data-dt-idx="2" tabindex="0">2</a><a class="paginate_button " aria-controls="tm" data-dt-idx="3" tabindex="0">3</a><a class="paginate_button " aria-controls="tm" data-dt-idx="4" tabindex="0">4</a><a class="paginate_button " aria-controls="tm" data-dt-idx="5" tabindex="0">5</a><span class="ellipsis">…</span><a class="paginate_button " aria-controls="tm" data-dt-idx="6" tabindex="0">10</a></span><a class="paginate_button next" aria-controls="tm" data-dt-idx="7" tabindex="0" id="tm_next">Next</a></div></div>
+   <div class="row">
+    <div class="col-md-12" style="height:25px;width:auto;">
+    </div>
+   </div>
+  </div>
+  <div class="tabcontent" id="keywordMetrics" style="display: none;">
+   <h4>
+    <b>
+     <i class="fa fa-table">
+     </i>
+     Keyword Metrics
+    </b>
+   </h4>
+   <hr>
+   <div id="km_wrapper" class="dataTables_wrapper no-footer"><div class="dataTables_length" id="km_length"><label>Show <select name="km_length" aria-controls="km" class=""><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div><div id="" class="margin"><div class="dt-buttons">          <button class="dt-button buttons-copy buttons-html5" tabindex="0" aria-controls="km" type="button" title="Copy"><span><i class="fa fa-files-o"></i></span></button> <button class="dt-button buttons-csv buttons-html5" tabindex="0" aria-controls="km" type="button" title="CSV"><span><i class="fa fa-file-text-o"></i></span></button> <button class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="km" type="button" title="Excel"><span><i class="fa fa-file-excel-o"></i></span></button> <button class="dt-button buttons-print" tabindex="0" aria-controls="km" type="button" title="Print"><span><i class="fa fa-print"></i></span></button> <button class="dt-button buttons-collection buttons-colvis" tabindex="0" aria-controls="km" type="button" title="Hide Column" aria-haspopup="true"><span><i class="fa fa-low-vision"></i></span></button> </div></div><div id="km_filter" class="dataTables_filter"><label>Search:<input type="search" class="" placeholder="" aria-controls="km"></label></div><table class="table row-border tablecard dataTable no-footer" id="km" role="grid" aria-describedby="km_info">
+    <thead>
+     <tr role="row"><th class="sorting" tabindex="0" aria-controls="km" rowspan="1" colspan="1" aria-label="
+       Test Case
+      : activate to sort column ascending" style="width: 0px;">
+       Test Case
+      </th><th class="sorting" tabindex="0" aria-controls="km" rowspan="1" colspan="1" aria-label="
+       Keyword
+      : activate to sort column ascending" style="width: 0px;">
+       Keyword
+      </th><th class="sorting" tabindex="0" aria-controls="km" rowspan="1" colspan="1" aria-label="
+       Status
+      : activate to sort column ascending" style="width: 0px;">
+       Status
+      </th><th class="sorting_desc" tabindex="0" aria-controls="km" rowspan="1" colspan="1" aria-sort="descending" aria-label="
+       Time (s)
+      : activate to sort column ascending" style="width: 0px;">
+       Time (s)
+      </th></tr>
+    </thead>
+    <tbody>
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+    <tr role="row" class="odd">
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Run NavLink Tests - DE
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Solutions Links
+      </td>
+      <td style="color: green">PASS</td>
+      <td class="sorting_1">725.876</td>
+     </tr><tr role="row" class="even">
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Solutions Links    ${DE_BLOG_URL}
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Validate Given Links
+      </td>
+      <td style="color: green">PASS</td>
+      <td class="sorting_1">669.898</td>
+     </tr><tr role="row" class="odd">
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Run NavLink Tests - NL
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Solutions Links
+      </td>
+      <td style="color: green">PASS</td>
+      <td class="sorting_1">636.785</td>
+     </tr><tr role="row" class="even">
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Run NavLink Tests - FR
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Solutions Links
+      </td>
+      <td style="color: green">PASS</td>
+      <td class="sorting_1">619.961</td>
+     </tr><tr role="row" class="odd">
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Solutions Links    ${NL_BLOG_URL}
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Validate Given Links
+      </td>
+      <td style="color: green">PASS</td>
+      <td class="sorting_1">616.862</td>
+     </tr><tr role="row" class="even">
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Solutions Links    ${FR_BLOG_URL}
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Validate Given Links
+      </td>
+      <td style="color: green">PASS</td>
+      <td class="sorting_1">590.899</td>
+     </tr><tr role="row" class="odd">
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Run Footer Tests - DE
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Validate Language Dropdown Links
+      </td>
+      <td style="color: green">PASS</td>
+      <td class="sorting_1">292.26</td>
+     </tr><tr role="row" class="even">
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Run NavLink Tests - UK
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Solutions Links
+      </td>
+      <td style="color: green">PASS</td>
+      <td class="sorting_1">286.66</td>
+     </tr><tr role="row" class="odd">
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Run Footer Tests - US
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Validate Language Dropdown Links
+      </td>
+      <td style="color: green">PASS</td>
+      <td class="sorting_1">260.436</td>
+     </tr><tr role="row" class="even">
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Solutions Links    ${UK_BLOG_URL}
+      </td>
+      <td style="word-wrap: break-word;max-width: 250px; white-space: normal; text-align:left">
+       Validate Given Links
+      </td>
+      <td style="color: green">PASS</td>
+      <td class="sorting_1">248.572</td>
+     </tr></tbody>
+   </table><div class="dataTables_info" id="km_info" role="status" aria-live="polite">Showing 1 to 10 of 4,870 entries</div><div class="dataTables_paginate paging_simple_numbers" id="km_paginate"><a class="paginate_button previous disabled" aria-controls="km" data-dt-idx="0" tabindex="0" id="km_previous">Previous</a><span><a class="paginate_button current" aria-controls="km" data-dt-idx="1" tabindex="0">1</a><a class="paginate_button " aria-controls="km" data-dt-idx="2" tabindex="0">2</a><a class="paginate_button " aria-controls="km" data-dt-idx="3" tabindex="0">3</a><a class="paginate_button " aria-controls="km" data-dt-idx="4" tabindex="0">4</a><a class="paginate_button " aria-controls="km" data-dt-idx="5" tabindex="0">5</a><span class="ellipsis">…</span><a class="paginate_button " aria-controls="km" data-dt-idx="6" tabindex="0">487</a></span><a class="paginate_button next" aria-controls="km" data-dt-idx="7" tabindex="0" id="km_next">Next</a></div></div>
+   <div class="row">
+    <div class="col-md-12" style="height:25px;width:auto;">
+    </div>
+   </div>
+  </div>
+  <div class="tabcontent" id="log" style="display: none;">
+   <p style="text-align:right">
+    **
+    <b>
+     Report.html
+    </b>
+    and
+    <b>
+     Log.html
+    </b>
+    need to be in current folder in 
+            order to display here
+   </p>
+   <div class="embed-responsive embed-responsive-4by3">
+    <iframe class="embed-responsive-item" src="./RF Metrics_files/log.html">
+    </iframe>
+   </div>
+  </div>
+ </div>
+ <script>
+  function createPieChart(passed_count, failed_count, skipped_count, ChartID, ChartName){
+            var status = [];
+            status.push(['Status', 'Percentage']);
+            status.push(['PASS',parseInt(passed_count)],['FAIL',parseInt(failed_count)],['SKIP',parseInt(skipped_count)]);
+            var data = google.visualization.arrayToDataTable(status);
+
+            var options = {
+            pieHole: 0.6,
+            legend: 'none',
+            chartArea: {width: "95%",height: "90%"},
+            colors: ['#2ecc71', '#fc6666', '#ffa500'],
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById(ChartID));
+            chart.draw(data, options);
+        }
+ </script>
+ <script>
+  function createBarGraph(tableID,keyword_column,time_column,limit,ChartID,Label,type){
+            var status = [];
+            css_selector_locator = tableID + ' tbody >tr'
+            var rows = $(css_selector_locator);
+            var columns;
+            var myColors = [
+                '#4F81BC',
+                '#C0504E',
+                '#9BBB58',
+                '#24BEAA',
+                '#8064A1',
+                '#4AACC5',
+                '#F79647',
+                '#815E86',
+                '#76A032',
+                '#34558B'
+            ];
+            status.push([type, Label,{ role: 'annotation'}, {role: 'style'}]);
+            for (var i = 0; i < rows.length; i++) {
+                if (i == Number(limit)){
+                    break;
+                }
+                //status = [];
+                name_value = $(rows[i]).find('td');
+
+                time=($(name_value[Number(time_column)]).html()).trim();
+                keyword=($(name_value[Number(keyword_column)]).html()).trim();
+                status.push([keyword,parseFloat(time),parseFloat(time),myColors[i]]);
+              }
+              var data = google.visualization.arrayToDataTable(status);
+
+              var options = {
+                legend: 'none',
+                chartArea: {width: "92%",height: "75%"},
+                bar: {
+                    groupWidth: '90%'
+                },
+                annotations: {
+                    alwaysOutside: true,
+                    textStyle: {
+                    fontName: 'Comic Sans MS',
+                    fontSize: 12,
+                    //bold: true,
+                    italic: true,
+                    color: "black",     // The color of the text.
+                    },
+                },
+                hAxis: {
+                    textStyle: {
+                        //fontName: 'Arial',
+                        fontName: 'Comic Sans MS',
+                        fontSize: 10,
+                    }
+                },
+                vAxis: {
+                    gridlines: { count: 10 },
+                    textStyle: {
+                        fontName: 'Comic Sans MS',
+                        fontSize: 10,
+                    }
+                },
+              };
+
+                // Instantiate and draw the chart.
+                var chart = new google.visualization.ColumnChart(document.getElementById(ChartID));
+                chart.draw(data, options);
+             }
+ </script>
+ <script>
+  function executeDataTable(tabname,sortCol) {
+        var fileTitle;
+        switch(tabname) {
+            case "#sm":
+                fileTitle = "SuiteMetrics";
+                break;
+            case "#tm":
+                fileTitle =  "TestMetrics";
+                break;
+            case "#km":
+                fileTitle =  "KeywordMetrics";
+                break;
+            default:
+                fileTitle =  "metrics";
+        }
+
+        $(tabname).DataTable(
+            {
+                retrieve: true,
+                "order": [[ Number(sortCol), "desc" ]],
+                dom: 'l<".margin" B>frtip',
+                "aoColumnDefs": [ {
+                    "aTargets": [ -1, -2 ],
+                    "mRender": function ( data, type, full ) {
+                        return $("<div/>").html(data).text(); 
+                    }
+                } ],
+                buttons: [
+                    {
+                        extend:    'copyHtml5',
+                        text:      '<i class="fa fa-files-o"></i>',
+                        filename: function() {
+                            return fileTitle + '-' + new Date().toLocaleString();
+                        },
+                        titleAttr: 'Copy',
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+					},
+
+                    {
+                        extend:    'csvHtml5',
+                        text:      '<i class="fa fa-file-text-o"></i>',
+                        titleAttr: 'CSV',
+                        filename: function() {
+                            return fileTitle + '-' + new Date().toLocaleString();
+                        },
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
+
+                    {
+                        extend:    'excelHtml5',
+                        text:      '<i class="fa fa-file-excel-o"></i>',
+                        titleAttr: 'Excel',
+                        filename: function() {
+                            return fileTitle + '-' + new Date().toLocaleString();
+                        },
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
+                    {
+                        extend:    'print',
+                        text:      '<i class="fa fa-print"></i>',
+                        titleAttr: 'Print',
+                        exportOptions: {
+                            columns: ':visible',
+                            alignment: 'left',
+                        }
+                    },
+                    {
+                        extend:    'colvis',
+                        collectionLayout: 'fixed two-column',
+                        text:      '<i class="fa fa-low-vision"></i>',
+                        titleAttr: 'Hide Column',
+                        exportOptions: {
+                            columns: ':visible'
+                        },
+                        postfixButtons: [ 'colvisRestore' ]
+                    },
+                ],
+                columnDefs: [ {
+                    visible: false,
+                } ]
+            }
+        );
+    }
+ </script>
+ <script>
+  function openPage(pageName,elmnt,color) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablink");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].style.color = "";
+        }
+        document.getElementById(pageName).style.display = "block";
+        elmnt.style.color = color;
+
+    }
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+ </script>
+ <script>
+  // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+ </script>
+ <script>
+  $(window).on('load',function(){$('.loader').fadeOut();});
+ </script>
+</body></html>
